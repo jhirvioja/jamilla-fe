@@ -18,6 +18,7 @@ An accessible React + Next.js + Tailwind CSS Recipe Book App!
 - Internationalization, en & fi languages can be found as common.json files at the /locales -folder
 - Some Playwright tests located in /tests -folder - note that you'll have to reach the right url's for them to work
 - Accessibility - not exhaustive but developed with that mindset
+- "About"-page which features further information about this project: motivations, reasonings, possible things that were planned but not done / could be implemented in the future
 
 ## Local Deployment
 
