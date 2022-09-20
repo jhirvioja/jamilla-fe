@@ -1,0 +1,9 @@
+**/*.css
+**/.next
+.eslintrc.js
+.pretterrc.json
+next-env.d.ts
+next.config.js
+stylelint.config.js
+tailwind.config.js
+tsconfig.json

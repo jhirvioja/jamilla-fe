@@ -1,0 +1,54 @@
+@import "https://fonts.googleapis.com/css2?family=Chango&family=Noto+Emoji:wght@600&display=swap";
+
+.jamillalogo {
+  font-family: Chango, cursive;
+  font-size: 2em;
+  color: white;
+  opacity: 0.85;
+}
+
+.icon {
+  position: absolute;
+  right: 42vh;
+  top: 0.8rem;
+}
+
+@media only screen and (max-width: 2400px) {
+  .icon {
+    right: 20vh;
+    top: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 1600px) {
+  .icon {
+    right: 0.8rem;
+    top: 0.8rem;
+  }
+}
+
+.navhidden {
+  display: none;
+}
+
+.nav a {
+  color: #fff;
+  display: block;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.nav a.active {
+  background-color: #fff;
+  color: #000;
+}
+
+.nav a:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.nav a:focus-within {
+  background-color: #fff;
+  color: #000;
+}

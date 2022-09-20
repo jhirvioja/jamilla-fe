@@ -1,34 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Jamilla Recipe Book App Frontend
 
-## Getting Started
+An accessible React + Next.js + Tailwind CSS Recipe Book App!
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- Mock landing page
+- Browse recipes as cards, paginated to pages
+- Browse one recipe
+- Recipe instructions flow: step-by-step, ability to quickly peep at the ingredients during recipe flow
+- Strikethroughable ingredient list which persists to localStorage (user can quit browser, or session can timeout without losing progress)
+- Add a recipe: ingredients with an unit and a value, step-by-step instructions
+- Edit & delete a recipe
+- One keyword search, which does a search on recipe's name & hashtags which are provided with the recipe
+- Dark theme
+- Ability to modifiy font weight, line height, letter spacing
+- Settings, where you can persist user settings to localStorage
+- Internationalization, en & fi languages can be found as common.json files at the /locales -folder
+- Some Playwright tests located in /tests -folder - note that you'll have to reach the right url's for them to work
+- Accessibility - not exhaustive but developed with that mindset
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Local Deployment
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Backend can be found at a different repo and is advised to deploy first. Take the backend address and add it to `next.config.js` env-settings as `API_URL`.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+For the frontend:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. Select the correct Node version (v.17.5.0)
 
-## Learn More
+`nvm use`
 
-To learn more about Next.js, take a look at the following resources:
+2. Install dependencies:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`npm install`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+3. Run locally:
 
-## Deploy on Vercel
+`npm run dev`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Code!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Other
+
+- Tests can be run with headless `npm run test:e2e` or headed with `npm run test:e2e:headed`
+- Build an optimized version with `npm run build`, start the optimized version with `npm run start`
