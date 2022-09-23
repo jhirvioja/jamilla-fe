@@ -13,7 +13,7 @@ An accessible React + Next.js + Tailwind CSS Recipe Book App!
 - Edit & delete a recipe
 - One keyword search, which does a search on recipe's name & hashtags which are provided with the recipe
 - Dark theme
-- Ability to modifiy font weight, line height, letter spacing
+- Ability to modify font weight, line height, letter spacing
 - Settings, where you can persist user settings to localStorage
 - Internationalization, en & fi languages can be found as common.json files at the /locales -folder
 - Some Playwright tests located in /tests -folder - note that you'll have to reach the right url's for them to work
