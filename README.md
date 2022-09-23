@@ -16,7 +16,7 @@ An accessible React + Next.js + Tailwind CSS Recipe Book App!
 - Ability to modify font weight, line height, letter spacing
 - Settings, where you can persist user settings to localStorage
 - Internationalization, en & fi languages can be found as common.json files at the /locales -folder
-- Some Playwright tests located in /tests -folder - note that you'll have to reach the right url's for them to work
+- Some Playwright tests located in /tests -folder
 - Accessibility - not exhaustive but developed with that mindset
 - "About"-page which features further information about this project: motivations, reasonings, possible things that were planned but not done / could be implemented in the future
 
@@ -42,5 +42,5 @@ For the frontend:
 
 ### Other
 
-- Tests can be run with headless `npm run test:e2e` or headed with `npm run test:e2e:headed`
+- Tests can be run with headless `npm run test:e2e` or headed with `npm run test:e2e:headed`. Note that you'll have to reach the right url's for them to work as it currently stands
 - Build an optimized version with `npm run build`, start the optimized version with `npm run start`
