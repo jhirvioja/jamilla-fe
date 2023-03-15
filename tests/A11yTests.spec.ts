@@ -12,7 +12,7 @@ test.describe('Landing', () => {
   test.beforeAll(async () => {
     browser = await chromium.launch()
     page = await browser.newPage()
-    await page.goto(`http://localhost:3000`)
+    await page.goto('/')
     await injectAxe(page)
   })
 
@@ -29,7 +29,7 @@ test.describe('Browse', () => {
   test.beforeAll(async () => {
     browser = await chromium.launch()
     page = await browser.newPage()
-    await page.goto(`http://localhost:3000/browse`)
+    await page.goto('/browse')
     await injectAxe(page)
   })
 
@@ -46,7 +46,7 @@ test.describe('Browse One Recipe', () => {
   test.beforeAll(async () => {
     browser = await chromium.launch()
     page = await browser.newPage()
-    await page.goto(`http://localhost:3000/browse`)
+    await page.goto('/browse')
     await injectAxe(page)
   })
 
@@ -64,7 +64,7 @@ test.describe('Add Recipe', () => {
   test.beforeAll(async () => {
     browser = await chromium.launch()
     page = await browser.newPage()
-    await page.goto(`http://localhost:3000/add`)
+    await page.goto('/add')
     await injectAxe(page)
   })
 
@@ -81,7 +81,7 @@ test.describe('Search Recipe', () => {
   test.beforeAll(async () => {
     browser = await chromium.launch()
     page = await browser.newPage()
-    await page.goto(`http://localhost:3000/search`)
+    await page.goto('/search')
     await injectAxe(page)
   })
 

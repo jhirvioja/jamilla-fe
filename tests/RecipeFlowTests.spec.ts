@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('http://localhost:3000/browse')
+  await page.goto('/browse')
 })
 
 test.describe('Recipe Flow tests', () => {
@@ -43,9 +43,9 @@ test.describe('Recipe Flow tests', () => {
     // Done with the mock pizza recipe. Otherwise, add clicks to fit the amount of steps for the tests to pass!
     await page.click('h1')
     await page.locator('text=Aloita resepti').click()
-    await page.locator('text=Seuraava').click()
-    await page.locator('text=Seuraava').click()
-    await page.locator('text=Seuraava').click()
+    await page.click('a:text("Seuraava")')
+    await page.click('a:text("Seuraava")')
+    await page.click('a:text("Seuraava")')
     expect(page.locator('#recipe__button--final')).toBeVisible
   })
 })

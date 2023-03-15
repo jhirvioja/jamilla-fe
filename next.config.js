@@ -4,7 +4,7 @@ const { i18n } = require('./next-i18next.config');
 
 module.exports = {
 	env: {
-		REACT_APP_URL: 'http://localhost:3000',
+		APP_URL: 'http://localhost:3000',
 		API_URL: 'http://localhost:5184'
 	},
   images: {

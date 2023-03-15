@@ -8,8 +8,8 @@
     "start": "next start",
     "lint": "npx eslint .",
     "stylelint": "npx stylelint \"**/*.css\"",
-    "test:e2e": "npx playwright test",
-    "test:e2e:headed": "npx playwright test --headed",
+    "test:e2e": "npx playwright test --reporter=list --project='chromium' && npx playwright test --reporter=list --project='firefox' && npx playwright test --reporter=list --project='webkit'",
+    "test:e2e:headed": "npx playwright test --headed --reporter=list --project='chromium' && npx playwright test --headed --reporter=list --project='firefox' && npx playwright test --headed --reporter=list --project='webkit'",
     "prettier": "npx prettier --write ."
   },
   "dependencies": {

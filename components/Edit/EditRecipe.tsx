@@ -319,7 +319,7 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
         .then((data) => console.log('Succesful, ' + data))
         .catch((err) => console.log('An error occured ' + err))
       // Then go to browse page. Todo: Should convey a message to screenreader that it was deleted
-      window.location.href = `${process.env.REACT_APP_URL}/browse/`
+      window.location.href = `${process.env.APP_URL}/browse/`
     }
 
     try {

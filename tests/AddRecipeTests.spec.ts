@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('http://localhost:3000/add')
+  await page.goto('/add')
 })
 
 test.describe('Recipe Add Tests', () => {
