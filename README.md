@@ -1,6 +1,6 @@
 # Jamilla Recipe Book App Frontend
 
-An accessible React + Next.js + Tailwind CSS Recipe Book App!
+An a11y friendly React + Next.js + Tailwind CSS Recipe Book App!
 
 ## Features
 
@@ -22,21 +22,15 @@ An accessible React + Next.js + Tailwind CSS Recipe Book App!
 
 ## Local Deployment
 
-Backend can be found at a different repo and is advised to deploy first. Take the backend address and add it to `next.config.js` env-settings as `API_URL`.
+Backend can be found at a [different repo](https://github.com/jhirvioja/jamilla-be) and is advised to deploy first. Take the backend address and add it to `next.config.js` env-settings as `API_URL`.
 
 For the frontend:
 
-1. Select the correct Node version (v.17.5.0)
+1. Select the correct Node version (v18.15.0 LTS): `nvm use`
 
-`nvm use`
+2. Install dependencies: `npm install`
 
-2. Install dependencies:
-
-`npm install`
-
-3. Run locally:
-
-`npm run dev`
+3. Run locally: `npm run dev`
 
 4. Code!
 
