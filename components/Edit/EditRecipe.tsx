@@ -4,13 +4,13 @@ import { useRouter } from 'next/router'
 
 import type { Recipe, Translations } from '../../types/recipes'
 
-import Input from '../Generic/Input'
-import Button from '../Generic/Button'
-import SubmitFormButton from '../Generic/SubmitFormButton'
-import TextArea from '../Generic/TextArea'
+import Input from '../Input'
+import Button from '../Button'
+import SubmitFormButton from '../SubmitFormButton'
+import TextArea from '../TextArea'
 import EditStepTextArea from '../Edit/EditStepTextArea'
-import Spinner from '../Generic/Spinner'
-import Select from '../Generic/Select'
+import Spinner from '../Spinner'
+import Select from '../Select'
 
 export const EditRecipe = ({ translations, recipe }: { translations: Translations; recipe: Recipe }) => {
   const router = useRouter()

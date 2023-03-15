@@ -1,4 +1,4 @@
-import type { Translations } from '../../types/recipes'
+import type { Translations } from '../types/recipes'
 
 type RecipeProps = {
   recipecost: number

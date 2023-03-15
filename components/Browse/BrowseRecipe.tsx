@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react'
 
 import Image from 'next/image'
 
-import RecipeTags from '../Generic/RecipeTags'
+import RecipeTags from '../RecipeTags'
 
 import type { Recipe, Translations } from '../../types/recipes'
-import Button from '../Generic/Button'
+import Button from '../Button'
 
 type RecipeProps = {
   recipe: Recipe

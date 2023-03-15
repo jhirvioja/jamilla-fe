@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import SubmitFormButton from '../Generic/SubmitFormButton'
-import Select from '../Generic/Select'
+import SubmitFormButton from '../SubmitFormButton'
+import Select from '../Select'
 import { Translations } from '../../types/recipes'
 
 const EditSettings = ({ translations }: { translations: Translations }) => {

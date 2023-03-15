@@ -1,8 +1,8 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
-import NavBar from '../components/Generic/NavBar'
-import Footer from '../components/Generic/Footer'
+import NavBar from '../components/NavBar'
+import Footer from '../components/Footer'
 import BrowseFeed from '../components/Browse/BrowseFeed'
 
 import type { Translations } from '../types/recipes'

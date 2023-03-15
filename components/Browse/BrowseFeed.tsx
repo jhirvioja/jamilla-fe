@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import BrowseCard from './BrowseCard'
-import Button from '../Generic/Button'
+import Button from '../Button'
 
 import type { Recipe, Translations } from '../../types/recipes'
 

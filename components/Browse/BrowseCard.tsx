@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import CostIcon from '../Generic/CostIcon'
-import RecipeTags from '../Generic/RecipeTags'
+import CostIcon from '../CostIcon'
+import RecipeTags from '../RecipeTags'
 
 import type { Recipe, Translations } from '../../types/recipes'
 

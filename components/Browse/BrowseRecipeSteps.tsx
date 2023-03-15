@@ -4,9 +4,9 @@ import BrowseProgress from './BrowseProgress'
 
 import type { Recipe, Translations } from '../../types/recipes'
 
-import Button from '../Generic/Button'
+import Button from '../Button'
 import BrowseModal from './BrowseModal'
-import VisuallyHidden from '../Generic/VisuallyHidden'
+import VisuallyHidden from '../VisuallyHidden'
 
 type RecipeProps = {
   recipe: Recipe

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import RecipeTags from '../Generic/RecipeTags'
+import RecipeTags from '../RecipeTags'
 
 import type { Recipe } from '../../types/recipes'
 

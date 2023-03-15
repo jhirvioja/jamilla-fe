@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
-import NavBar from '../../components/Generic/NavBar'
-import Footer from '../../components/Generic/Footer'
+import NavBar from '../NavBar'
+import Footer from '../Footer'
 
 import type { Translations } from '../../types/recipes'
 

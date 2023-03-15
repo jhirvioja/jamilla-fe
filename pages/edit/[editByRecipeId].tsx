@@ -8,8 +8,8 @@ import { EditRecipe } from '../../components/Edit/EditRecipe'
 import Browse404 from '../../components/Browse/Browse404'
 import BrowseError from '../../components/Browse/BrowseError'
 import BrowseLoading from '../../components/Browse/BrowseLoading'
-import NavBar from '../../components/Generic/NavBar'
-import Footer from '../../components/Generic/Footer'
+import NavBar from '../../components/NavBar'
+import Footer from '../../components/Footer'
 
 import type { Recipe, Translations } from '../../types/recipes'
 

@@ -2,8 +2,8 @@ import { useId } from 'react'
 
 import type { Translations } from '../../types/recipes'
 
-import Input from '../Generic/Input'
-import Button from '../Generic/Button'
+import Input from '../Input'
+import Button from '../Button'
 
 type IngredientProps = {
   variant?: string

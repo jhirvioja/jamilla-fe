@@ -3,8 +3,8 @@ import React, { useState, useEffect, createRef } from 'react'
 import useSWR from 'swr'
 
 import SearchCard from './SearchCard'
-import Input from '../Generic/Input'
-import SubmitFormButton from '../Generic/SubmitFormButton'
+import Input from '../Input'
+import SubmitFormButton from '../SubmitFormButton'
 
 import type { Recipe, TagsArray, Translations } from '../../types/recipes'
 import SkeletonLoading from './SkeletonLoading'

@@ -1,6 +1,6 @@
 import { useId } from 'react'
 
-import { Translations } from './../../types/recipes'
+import { Translations } from '../types/recipes'
 
 import VisuallyHidden from './VisuallyHidden'
 

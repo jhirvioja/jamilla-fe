@@ -2,7 +2,7 @@ import { useId } from 'react'
 
 import { Translations } from './../../types/recipes'
 
-import VisuallyHidden from './../Generic/VisuallyHidden'
+import VisuallyHidden from '../VisuallyHidden'
 
 type StepTextAreaProps = {
   label: string

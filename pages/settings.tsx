@@ -1,8 +1,8 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
-import NavBar from '../components/Generic/NavBar'
-import Footer from '../components/Generic/Footer'
+import NavBar from '../components/NavBar'
+import Footer from '../components/Footer'
 import EditSettings from '../components/Settings/EditSettings'
 
 import { useTranslation } from 'next-i18next'

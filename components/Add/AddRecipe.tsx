@@ -2,14 +2,14 @@ import React, { useState, createRef } from 'react'
 
 import type { Translations } from '../../types/recipes'
 
-import AmountOfRecipes from '../Generic/AmountOfRecipes'
-import Input from '../Generic/Input'
-import Button from '../Generic/Button'
-import SubmitFormButton from '../Generic/SubmitFormButton'
-import TextArea from '../Generic/TextArea'
+import AmountOfRecipes from '../AmountOfRecipes'
+import Input from '../Input'
+import Button from '../Button'
+import SubmitFormButton from '../SubmitFormButton'
+import TextArea from '../TextArea'
 import EditStepTextArea from '../Edit/EditStepTextArea'
-import Spinner from '../Generic/Spinner'
-import Select from '../Generic/Select'
+import Spinner from '../Spinner'
+import Select from '../Select'
 
 export const AddRecipe = ({ translations }: { translations: Translations }) => {
   //

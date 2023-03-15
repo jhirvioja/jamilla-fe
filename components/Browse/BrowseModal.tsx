@@ -1,6 +1,6 @@
 import ReactModal from 'react-modal'
 
-import Button from '../../components/Generic/Button'
+import Button from '../Button'
 
 import React, { useState } from 'react'
 
