@@ -380,21 +380,24 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
       }
       if (formSteps.checkValidity() && formIngredients.checkValidity() && formBasics.checkValidity()) {
         setLoading('loading')
-        await fetch(`${process.env.API_URL}/recipe`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formstate),
-        })
-          .then((response) => response.json())
-          .then(() => {
-            setLoading('done')
+        try {
+          const response = await fetch(`${process.env.API_URL}/recipe`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formstate),
           })
-          .catch((error) => {
-            console.error('Error:', error)
+
+          if (!response.ok) {
+            console.error('Error:', response.status, response.statusText)
             setLoading('error')
-          })
+          }
+
+          setLoading('done')
+        } catch (error) {
+          console.error(error)
+        }
       }
     }
 

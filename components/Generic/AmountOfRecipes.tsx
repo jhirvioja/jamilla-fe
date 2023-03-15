@@ -4,14 +4,22 @@ const AmountOfRecipes = ({ text1, text2, amounterror }: { text1: string; text2: 
   const [recipesLength, setRecipesLength] = useState<number>()
 
   useEffect(() => {
-    fetch(`${process.env.API_URL}/recipes/amount`)
-      .then((res) => res.json())
-      .then((data) => {
+    fetchAmountOfRecipes()
+
+    async function fetchAmountOfRecipes() {
+      try {
+        const response = await fetch(`${process.env.API_URL}/recipes/amount`)
+
+        if (!response.ok) {
+          console.error('Error:', response.status, response.statusText)
+        }
+
+        const data = await response.json()
         setRecipesLength(data)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+      } catch (error) {
+        console.error(error)
+      }
+    }
   }, [])
 
   if (recipesLength === 0) {

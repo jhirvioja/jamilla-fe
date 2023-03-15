@@ -32,15 +32,24 @@ const BrowseByRecipeId: NextPage = () => {
 
   useEffect(() => {
     if (router.query.browseByRecipeId) {
-      fetch(`${process.env.API_URL}/recipe/${router.query.browseByRecipeId}`)
-        .then((res) => res.json())
-        .then((recipe) => {
-          setRecipe(recipe)
-        })
-        .catch((error) => {
-          console.log(error)
+      fetchRecipeById()
+    }
+
+    async function fetchRecipeById() {
+      try {
+        const response = await fetch(`${process.env.API_URL}/recipe/${router.query.browseByRecipeId}`)
+
+        if (!response.ok) {
+          console.error('Error: ', response.status, response.statusText)
           setError(true)
-        })
+        }
+
+        const recipe = await response.json()
+        setRecipe(recipe)
+      } catch (error) {
+        console.error(error)
+        setError(true)
+      }
     }
   }, [])
 

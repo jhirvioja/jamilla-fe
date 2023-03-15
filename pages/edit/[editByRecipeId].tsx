@@ -29,15 +29,24 @@ const Edit: NextPage = () => {
   useEffect(() => {
     // This could use localStorage copy, works like this for now though
     if (router.query.editByRecipeId) {
-      fetch(`${process.env.API_URL}/recipe/${router.query.editByRecipeId}`)
-        .then((res) => res.json())
-        .then((recipe) => {
-          setRecipe(recipe)
-        })
-        .catch((error) => {
-          console.log(error)
+      fetchRecipeById()
+    }
+
+    async function fetchRecipeById() {
+      try {
+        const response = await fetch(`${process.env.API_URL}/recipe/${router.query.editByRecipeId}`)
+
+        if (!response.ok) {
+          console.error('Error: ', response.status, response.statusText)
           setError(true)
-        })
+        }
+
+        const recipe = await response.json()
+        setRecipe(recipe)
+      } catch (error) {
+        console.error(error)
+        setError(true)
+      }
     }
   }, [])
 

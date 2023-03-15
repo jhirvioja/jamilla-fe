@@ -304,20 +304,8 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
   const onDeleteButtonClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     event.preventDefault()
 
-    const deleteMethod = {
-      method: 'DELETE',
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-    }
-
-    const url = `${process.env.API_URL}/recipe/${recipe.recipeId}`
-
     if (confirm(translations.deletequestion)) {
-      fetch(url, deleteMethod)
-        .then((response) => response.json())
-        .then((data) => console.log('Succesful, ' + data))
-        .catch((err) => console.log('An error occured ' + err))
+      deleteRecipe()
       // Then go to browse page. Todo: Should convey a message to screenreader that it was deleted
       window.location.href = `${process.env.APP_URL}/browse/`
     }
@@ -407,22 +395,25 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
       }
       if (formSteps.checkValidity() && formIngredients.checkValidity() && formBasics.checkValidity()) {
         setLoading('loading')
-        await fetch(`${process.env.API_URL}/recipe`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formstate),
-        })
-          .then((response) => response.json())
-          .then(() => {
-            setLoading('done')
-            deleteOriginalRecipeFromApi()
+
+        try {
+          const response = await fetch(`${process.env.API_URL}/recipe`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formstate),
           })
-          .catch((error) => {
-            console.error('Error:', error)
-            setLoading('error')
-          })
+
+          if (!response.ok) {
+            console.error('Error:', response.status, response.statusText)
+          }
+
+          setLoading('done')
+          deleteOriginalRecipeFromApi()
+        } catch (error) {
+          console.error(error)
+        }
       }
     }
 
@@ -435,21 +426,22 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
         console.log('Error while trying to remove from localStorage')
       }
 
-      const url = `${process.env.API_URL}/recipe/${recipe.recipeId}`
+      try {
+        const response = await fetch(`${process.env.API_URL}/recipe/${recipe.recipeId}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        })
 
-      const deleteMethod = {
-        method: 'DELETE',
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
+        if (!response.ok) {
+          console.error('Error:', response.status, response.statusText)
+        }
+
+        router.push('/browse')
+      } catch (error) {
+        console.error(error)
       }
-
-      const response = await fetch(url, deleteMethod)
-        .then((response) => response.json())
-        .then(() => router.push('/browse'))
-        .catch((err) => console.log('An error occured, ' + err))
-
-      return response
     }
 
     //
@@ -463,6 +455,23 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
     //
 
     postRecipe()
+  }
+
+  async function deleteRecipe() {
+    try {
+      const response = await fetch(`${process.env.API_URL}/recipe/${recipe.recipeId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+
+      if (!response.ok) {
+        console.error('Error:', response.status, response.statusText)
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (

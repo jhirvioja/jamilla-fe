@@ -20,19 +20,19 @@ type dataFromApi = {
 // Error handling down below taken from: https://swr.vercel.app/docs/error-handling
 
 const fetcher = async (url: string) => {
-  const res = await fetch(url)
+  const response = await fetch(url)
 
   // If the status code is not in the range 200-299,
   // we still try to parse and throw it.
 
-  if (!res.ok) {
+  if (!response.ok) {
     const error = new Error('An error occurred while fetching the data.')
 
     // Attach extra info to the error object.
 
     throw error
   }
-  return res.json()
+  return response.json()
 }
 
 const SearchFeed = ({ translations }: { translations: Translations }) => {

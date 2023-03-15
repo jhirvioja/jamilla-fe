@@ -15,23 +15,43 @@ const BrowseFeed = ({ translations }: { translations: Translations }) => {
 
   useEffect(() => {
     setLoading(true)
-    fetch(`${process.env.API_URL}/recipes/${pages}`)
-      .then((res) => res.json())
-      .then((data) => {
+    fetchRecipes()
+
+    async function fetchRecipes() {
+      try {
+        const response = await fetch(`${process.env.API_URL}/recipes/${pages}`)
+
+        if (!response.ok) {
+          setError(true)
+          console.error(error)
+        }
+
+        const data = await response.json()
+
         setData(data)
         setLoading(false)
-      })
-      .catch((error) => {
+      } catch (error) {
         setError(true)
-        console.log(error)
-      })
+        console.error(error)
+      }
+    }
   }, [])
 
   const onLoadMoreClick = () => {
     setLoadingMoreDone(false)
-    fetch(`${process.env.API_URL}/recipes/${pages + 1}`)
-      .then((res) => res.json())
-      .then((newData) => {
+    fetchMoreRecipes()
+
+    async function fetchMoreRecipes() {
+      try {
+        const response = await fetch(`${process.env.API_URL}/recipes/${pages + 1}`)
+
+        if (!response.ok) {
+          setError(true)
+          console.error(error)
+        }
+
+        const newData = await response.json()
+
         if (newData.length === 0) {
           setPossibleToFetchRecipes(false)
         } else {
@@ -41,11 +61,11 @@ const BrowseFeed = ({ translations }: { translations: Translations }) => {
           setLoadingMoreDone(true)
           setPages((current) => current + 1)
         }
-      })
-      .catch((error) => {
+      } catch (error) {
         setError(true)
-        console.log(error)
-      })
+        console.error(error)
+      }
+    }
   }
 
   return (
