@@ -5,7 +5,7 @@ test.beforeEach(async ({ page }) => {
 })
 
 test.describe('Recipe Add Tests', () => {
-  test('Different operational buttons exist', async ({ page }) => {
+  test('Different operational buttons exist', ({ page }) => {
     expect(page.locator('text=Lisää ainesosa')).toBeVisible
     expect(page.locator('text=Lisää kohta')).toBeVisible
     expect(page.locator('text=Tallenna ja julkaise')).toBeVisible
@@ -25,20 +25,20 @@ test.describe('Recipe Add Tests', () => {
 
   test('After adding an ingredient, user can delete said ingredient', async ({ page }) => {
     await page.locator('text=Lisää ainesosa').click()
-    await expect(page.locator('text=Poista ainesosa')).toBeVisible
+    expect(page.locator('text=Poista ainesosa')).toBeVisible
     await page.locator('text=Poista ainesosa').click()
-    await expect(page.locator('text=Poista ainesosa')).not.toBeVisible
+    expect(page.locator('text=Poista ainesosa')).not.toBeVisible
   })
 
   test('After adding a part, user can delete the part', async ({ page }) => {
     await page.locator('text=Lisää kohta').click()
-    await expect(page.locator('text=Poista kohta')).toBeVisible
+    expect(page.locator('text=Poista kohta')).toBeVisible
     await page.locator('text=Poista kohta').click()
-    await expect(page.locator('text=Poista kohta')).not.toBeVisible
+    expect(page.locator('text=Poista kohta')).not.toBeVisible
   })
 
   test('Clicking submit on an empty form does not submit and emits error', async ({ page }) => {
     await page.locator('text=Tallenna').click()
-    await expect(page.locator('text=Tarkistathan lomakkeen')).toBeVisible
+    expect(page.locator('text=Tarkistathan lomakkeen')).toBeVisible
   })
 })

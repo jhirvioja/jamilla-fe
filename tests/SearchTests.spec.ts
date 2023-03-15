@@ -5,7 +5,7 @@ test.beforeEach(async ({ page }) => {
 })
 
 test.describe('Search Tests', () => {
-  test('Search Button Exists', async ({ page }) => {
+  test('Search Button Exists', ({ page }) => {
     expect(page.locator('button', { hasText: 'Hae' })).toBeVisible
   })
 

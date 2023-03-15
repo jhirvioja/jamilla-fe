@@ -19,7 +19,7 @@
     @apply text-gray-800 text-base dark:text-white;
   }
 
-	li {
+  li {
     @apply text-gray-800 text-base dark:text-white ml-6;
   }
 }
