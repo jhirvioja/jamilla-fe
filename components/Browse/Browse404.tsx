@@ -6,27 +6,27 @@ import Footer from '../../components/Generic/Footer'
 import type { Translations } from '../../types/recipes'
 
 type Props = {
-	translations: Translations
+  translations: Translations
 }
 
 const Browse404 = ({ translations }: Props) => {
-	return (
-		<div>
-			<Head>
-				<title>{translations.browserecipes} | Jamilla</title>
-			</Head>
-			<NavBar />
-			<div className="container mx-auto">
-				<div className="main dark:bg-zinc-900" role="main">
-					<div className="text-black dark:text-white text-center" aria-live="polite">
-						{translations.browse404}
-						<span aria-hidden="true"> ☝️</span>
-					</div>
-				</div>
-			</div>
-			<Footer />
-		</div>
-	)
+  return (
+    <div>
+      <Head>
+        <title>{translations.browserecipes} | Jamilla</title>
+      </Head>
+      <NavBar />
+      <div className="container mx-auto">
+        <div className="main dark:bg-zinc-900" role="main">
+          <div className="text-black dark:text-white text-center" aria-live="polite">
+            {translations.browse404}
+            <span aria-hidden="true"> ☝️</span>
+          </div>
+        </div>
+      </div>
+      <Footer />
+    </div>
+  )
 }
 
 export default Browse404

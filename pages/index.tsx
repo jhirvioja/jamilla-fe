@@ -7,18 +7,18 @@ import LandingBoxes from '../components/LandingPage/LandingBoxes'
 import LandingFooter from '../components/LandingPage/LandingFooter'
 
 const Home: NextPage = () => {
-	return (
-		<div className={styles.landingbackground}>
-			<Head>
-				<title>Jamilla</title>
-			</Head>
-			<LandingNavBar />
-			<main className={styles.main}>
-				<LandingBoxes />
-			</main>
-			<LandingFooter />
-		</div>
-	)
+  return (
+    <div className={styles.landingbackground}>
+      <Head>
+        <title>Jamilla</title>
+      </Head>
+      <LandingNavBar />
+      <main className={styles.main}>
+        <LandingBoxes />
+      </main>
+      <LandingFooter />
+    </div>
+  )
 }
 
 export default Home
