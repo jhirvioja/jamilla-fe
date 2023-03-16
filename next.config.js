@@ -3,6 +3,9 @@
 const { i18n } = require('./next-i18next.config');
 
 module.exports = {
+	experimental: {
+    outputStandalone: true,
+  },
 	env: {
 		APP_URL: 'http://localhost:3000',
 		API_URL: 'http://localhost:5184'
