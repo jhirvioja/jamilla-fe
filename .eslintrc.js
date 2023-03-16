@@ -12,7 +12,7 @@ module.exports = {
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
-				'plugin:@next/next/recommended',
+        "plugin:@next/next/recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:jsx-a11y/recommended",
     ],
@@ -31,6 +31,6 @@ module.exports = {
     ],
     "rules": {
         "react/react-in-jsx-scope": "off",
-				"require-await": "error",
+        "require-await": "error",
     }
 }

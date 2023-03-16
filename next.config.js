@@ -8,12 +8,12 @@ module.exports = {
 		API_URL: 'http://localhost:5184'
 	},
   images: {
-    domains: [
+    domains: [ // Not sure if this is necessary, but I am going to assume it is
       'https://i.imgur.com',
       'i.imgur.com',
       'https://imgur.com',
       'imgur.com',
-    ], // Not sure if this is necessary, but I am going to assume it is
+    ],
   },
   reactStrictMode: true,
 	i18n,

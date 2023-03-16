@@ -1,6 +1,6 @@
 # Jamilla Recipe Book App Frontend
 
-An a11y friendly React + Next.js + Tailwind CSS Recipe Book App!
+An a11y friendly React/Next.js + Tailwind CSS Recipe Book App!
 
 ## Features
 
@@ -36,5 +36,5 @@ For the frontend:
 
 ### Other
 
-- Tests can be run with headless `npm run test:e2e` or headed with `npm run test:e2e:headed`. Note that you'll have to reach the right url's for them to work as it currently stands
+- Tests can be run with headless `npm run test:e2e` or headed with `npm run test:e2e:headed`
 - Build an optimized version with `npm run build`, start the optimized version with `npm run start`
