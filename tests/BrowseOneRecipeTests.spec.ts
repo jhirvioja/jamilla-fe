@@ -6,7 +6,7 @@ test.beforeEach(async ({ page }) => {
 
 test.describe('Browse Page tests', () => {
   test('Can strikethrough and un-strikethrough an item with click', async ({ page }) => {
-    await page.click('h1')
+    await page.click('h2')
     await page.click('#ri_0')
     const locator = page.locator('#ri_0')
     await expect(locator).toHaveClass(/line-through/)
@@ -15,7 +15,7 @@ test.describe('Browse Page tests', () => {
   })
 
   test('Can strikethrough and un-strikethrough an item with keyboard press', async ({ page }) => {
-    await page.click('h1')
+    await page.click('h2')
     await page.press('#ri_0', 'Enter')
     const locator = page.locator('#ri_0')
     await expect(locator).toHaveClass(/line-through/)

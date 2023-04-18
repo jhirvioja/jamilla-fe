@@ -57,7 +57,7 @@ const BrowseRecipe = (recipe: RecipeProps) => {
         <div className="text-center p-2">
           <div className="inline-block p-2">
             <Button
-              url={recipe.part === '0' ? `/browse/${recipeData.recipeId}` : `/browse/${recipeData.recipeId}?part=${previousPart}`}
+              url={recipe.part === '0' ? `/browse/${recipeData.id}` : `/browse/${recipeData.id}?part=${previousPart}`}
               variant="primary"
             >
               {recipe.translations.previous}
@@ -65,7 +65,7 @@ const BrowseRecipe = (recipe: RecipeProps) => {
           </div>
           <div className="inline-block p-2">
             <Button
-              url={isItTheLastStep ? `/browse/${recipeData.recipeId}?part=fin` : `/browse/${recipeData.recipeId}?part=${nextPart}`}
+              url={isItTheLastStep ? `/browse/${recipeData.id}?part=fin` : `/browse/${recipeData.id}?part=${nextPart}`}
               variant="primary"
             >
               {recipe.translations.next}

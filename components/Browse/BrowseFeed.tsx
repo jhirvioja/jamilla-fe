@@ -7,7 +7,7 @@ import type { Recipe, Translations } from '../../types/recipes'
 
 const BrowseFeed = ({ translations }: { translations: Translations }) => {
   const [data, setData] = useState<Array<Recipe>>([])
-  const [pages, setPages] = useState(0)
+  const [skip, setSkip] = useState(5)
   const [error, setError] = useState<boolean>()
   const [areThereAnyMoreRecipes, setPossibleToFetchRecipes] = useState(true)
   const [loadingMoreDone, setLoadingMoreDone] = useState<boolean>(false)
@@ -19,7 +19,7 @@ const BrowseFeed = ({ translations }: { translations: Translations }) => {
 
     async function fetchRecipes() {
       try {
-        const response = await fetch(`${process.env.API_URL}/recipes/${pages}`)
+        const response = await fetch(`${process.env.API_URL}/Recipes/pagination/0/5`)
 
         if (!response.ok) {
           setError(true)
@@ -41,31 +41,29 @@ const BrowseFeed = ({ translations }: { translations: Translations }) => {
     setLoadingMoreDone(false)
     fetchMoreRecipes()
 
-    async function fetchMoreRecipes() {
-      try {
-        const response = await fetch(`${process.env.API_URL}/recipes/${pages + 1}`)
-
-        if (!response.ok) {
-          setError(true)
-          console.error(error)
-        }
-
-        const newData = await response.json()
-
-        if (newData.length === 0) {
-          setPossibleToFetchRecipes(false)
-        } else {
-          for (let i = 0; i < newData.length; i++) {
-            setData((current) => [...current, newData[i]])
-          }
-          setLoadingMoreDone(true)
-          setPages((current) => current + 1)
-        }
-      } catch (error) {
-        setError(true)
-        console.error(error)
-      }
-    }
+		async function fetchMoreRecipes() {
+			try {
+				const response = await fetch(`${process.env.API_URL}/Recipes/pagination/${skip}/5`)
+	
+				if (!response.ok) {
+					setError(true)
+					console.error(error)
+				}
+	
+				const newData = await response.json()
+	
+				if (newData.length === 0) {
+					setPossibleToFetchRecipes(false)
+				} else {
+					setData((current) => [...current, ...newData])
+					setLoadingMoreDone(true)
+					setSkip((current) => current + 5)
+				}
+			} catch (error) {
+				setError(true)
+				console.error(error)
+			}
+		}
   }
 
   return (

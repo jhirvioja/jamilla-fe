@@ -39,57 +39,35 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
   // Init configuration for the state
   //
 
-  const figureOutCost = (props: string | number) => {
-    switch (props) {
-      case 1:
-        return 1
-      case 2:
-        return 2
-      case 3:
-        return 3
-      case translations.priceselect1:
-        return 1
-      case translations.priceselect2:
-        return 2
-      case translations.priceselect3:
-        return 3
-    }
-  }
+	const figureOutCost = (props: string | number) => {
+		const priceMap = {
+			1: 1,
+			2: 2,
+			3: 3,
+			[translations.priceselect1]: 1,
+			[translations.priceselect2]: 2,
+			[translations.priceselect3]: 3,
+		};
+	
+		return priceMap[props];
+	};
 
   const freshIngredientsObj = recipe.recipeIngredients.map(
     (item, i) =>
       (item = {
-        recipeId: 0,
-        recipeIngredientId: 0,
         name: recipe.recipeIngredients[i].name,
         stock: false as boolean,
-        amounts: [
-          {
-            recipeIngredientId: 0,
-            amountId: 0,
-            value: recipe.recipeIngredients[i].amounts[0].value,
-            unit: recipe.recipeIngredients[i].amounts[0].unit,
-          },
-        ],
+				amountValue: recipe.recipeIngredients[i].amountValue,
+				amountUnit: recipe.recipeIngredients[i].amountUnit
       }),
   )
 
   const freshStepsObj = recipe.steps.map(
     (item, i) =>
       (item = {
-        recipeId: 0,
-        stepId: 0,
+        part: i,
         description: recipe.steps[i].description,
         steplast: false as boolean,
-      }),
-  )
-
-  const freshTagsObj = recipe.tags.map(
-    (item, i) =>
-      (item = {
-        recipeId: 0,
-        tagId: 0,
-        tagsArr: recipe.tags[i].tagsArr,
       }),
   )
 
@@ -99,13 +77,15 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
 
   const [loading, setLoading] = useState<string>()
   const [formstate, setFormState] = useState({
-    recipeId: 0,
+    id: recipe.id,
+		userid: '4f959a9c-b9d1-406b-b1ad-886c550066bf',
+		date: recipe.date,
     name: recipe.name,
     description: recipe.description,
     prepTime: '30min',
     cost: undefined,
     imgSrc: recipe.imgSrc,
-    tags: freshTagsObj,
+    tags: recipe.tags,
     recipeIngredients: freshIngredientsObj,
     steps: freshStepsObj,
   })
@@ -129,7 +109,7 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
       ...formstate,
       [name]: [
         {
-          recipeId: 0,
+          id: 0,
           tagId: 0,
           tagsArr: value,
         },
@@ -141,18 +121,10 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
     const value = (event.target as HTMLInputElement).value
 
     const updObj = {
-      recipeId: 0,
-      recipeIngredientId: 0,
       name: value,
       stock: false,
-      amounts: [
-        {
-          recipeIngredientId: 0,
-          amountId: 0,
-          value: formstate.recipeIngredients[i].amounts[0].value,
-          unit: formstate.recipeIngredients[i].amounts[0].unit,
-        },
-      ],
+			amountValue: formstate.recipeIngredients[i].amountValue,
+			amountUnit: formstate.recipeIngredients[i].amountUnit,
     }
 
     const recipeIngredients = formstate.recipeIngredients.map((item, i2) => (i2 === i ? (item = updObj) : item))
@@ -164,18 +136,10 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
     const value = (event.target as HTMLInputElement).value
 
     const updObj = {
-      recipeId: formstate.recipeIngredients[i].recipeId,
-      recipeIngredientId: formstate.recipeIngredients[i].recipeIngredientId,
       name: formstate.recipeIngredients[i].name,
       stock: false,
-      amounts: [
-        {
-          recipeIngredientId: formstate.recipeIngredients[i].recipeIngredientId,
-          amountId: formstate.recipeIngredients[i].amounts[0].amountId,
-          value: formstate.recipeIngredients[i].amounts[0].value,
-          unit: value,
-        },
-      ],
+      amountValue: formstate.recipeIngredients[i].amountValue,
+			amountUnit: value
     }
 
     const recipeIngredients = formstate.recipeIngredients.map((item, i2) => (i2 === i ? (item = updObj) : item))
@@ -187,18 +151,10 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
     const value = (event.target as HTMLInputElement).value
 
     const updObj = {
-      recipeId: formstate.recipeIngredients[i].recipeId,
-      recipeIngredientId: formstate.recipeIngredients[i].recipeIngredientId,
       name: formstate.recipeIngredients[i].name,
       stock: false,
-      amounts: [
-        {
-          recipeIngredientId: formstate.recipeIngredients[i].recipeIngredientId,
-          amountId: formstate.recipeIngredients[i].amounts[0].amountId,
-          value: value,
-          unit: formstate.recipeIngredients[i].amounts[0].unit,
-        },
-      ],
+			amountValue: value,
+			amountUnit: formstate.recipeIngredients[i].amountUnit
     }
 
     const recipeIngredients = formstate.recipeIngredients.map((item, i2) => (i2 === i ? (item = updObj) : item))
@@ -217,8 +173,7 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
     const value = (event.target as HTMLInputElement).value
 
     const updObj = {
-      recipeId: formstate.steps[i].recipeId,
-      stepId: formstate.steps[i].stepId,
+			part: i,
       description: value,
       steplast: formstate.steps[i].steplast,
     }
@@ -250,18 +205,10 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
 
   const onAddIngredientButtonClick = () => {
     const newObj = {
-      recipeId: recipe.recipeId,
-      recipeIngredientId: 0,
       name: '',
       stock: false,
-      amounts: [
-        {
-          recipeIngredientId: 0,
-          amountId: 0,
-          value: '',
-          unit: '',
-        },
-      ],
+			amountValue: '',
+			amountUnit: ''
     }
 
     formstate.recipeIngredients.push(newObj)
@@ -276,8 +223,7 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
     const i = formstate.steps.length - 1
 
     const newObj = {
-      recipeId: recipe.recipeId,
-      stepId: 0,
+			part: 0,
       description: '',
       steplast: true,
     }
@@ -285,8 +231,7 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
     formstate.steps.push(newObj)
 
     const updObj = {
-      recipeId: formstate.steps[i].recipeId,
-      stepId: formstate.steps[i].stepId,
+			part: i,
       description: formstate.steps[i].description,
       steplast: false,
     }
@@ -306,15 +251,13 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
 
     if (confirm(translations.deletequestion)) {
       deleteRecipe()
-      // Then go to browse page. Todo: Should convey a message to screenreader that it was deleted
-      window.location.href = `${process.env.APP_URL}/browse/`
     }
 
     try {
       // In order to keep up the sync with localStorage
       // we need to delete it from there as well
 
-      window.localStorage.removeItem('recipe_' + recipe.recipeId)
+      window.localStorage.removeItem('recipe_' + recipe.id)
     } catch (error) {
       console.log('Error while trying to remove from localStorage')
     }
@@ -359,7 +302,7 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
       descRefValidity.setCustomValidity('')
     }
 
-    if (formstate.tags[0].tagsArr.length < 1) {
+    if (formstate.tags.length < 1) {
       tagsRefValidity.setCustomValidity(translations.hashValid)
     } else {
       tagsRefValidity.setCustomValidity('')
@@ -387,7 +330,7 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
     priceRefValidity.reportValidity()
     nameRefValidity.reportValidity()
 
-    // Post a recipe
+    // Post a recipe // TODO: make a put update option
 
     async function postRecipe() {
       if (!formSteps.checkValidity() || !formIngredients.checkValidity() || !formBasics.checkValidity()) {
@@ -397,8 +340,8 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
         setLoading('loading')
 
         try {
-          const response = await fetch(`${process.env.API_URL}/recipe`, {
-            method: 'POST',
+          const response = await fetch(`${process.env.API_URL}/Recipes/${recipe.id}`, {
+            method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
             },
@@ -407,40 +350,26 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
 
           if (!response.ok) {
             console.error('Error:', response.status, response.statusText)
+						setLoading('error')
           }
 
-          setLoading('done')
-          deleteOriginalRecipeFromApi()
+					if (response.ok) {
+						deleteOriginalRecipeFromLocalStorage()
+						setLoading('done')
+					}
         } catch (error) {
           console.error(error)
         }
       }
     }
 
-    // Delete the old recipe from localStorage and API
+    // Delete the old recipe from localStorage
 
-    async function deleteOriginalRecipeFromApi() {
+    function deleteOriginalRecipeFromLocalStorage() {
       try {
-        window.localStorage.removeItem('recipe_' + recipe.recipeId)
+        window.localStorage.removeItem('recipe_' + recipe.id)
       } catch (error) {
         console.log('Error while trying to remove from localStorage')
-      }
-
-      try {
-        const response = await fetch(`${process.env.API_URL}/recipe/${recipe.recipeId}`, {
-          method: 'DELETE',
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        })
-
-        if (!response.ok) {
-          console.error('Error:', response.status, response.statusText)
-        }
-
-        router.push('/browse')
-      } catch (error) {
-        console.error(error)
       }
     }
 
@@ -459,7 +388,7 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
 
   async function deleteRecipe() {
     try {
-      const response = await fetch(`${process.env.API_URL}/recipe/${recipe.recipeId}`, {
+      const response = await fetch(`${process.env.API_URL}/Recipes/${recipe.id}`, {
         method: 'DELETE',
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
@@ -468,7 +397,12 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
 
       if (!response.ok) {
         console.error('Error:', response.status, response.statusText)
+				setLoading('error')
       }
+
+			if (response.ok) {
+				window.location.href = `${process.env.APP_URL}/browse/`
+			}
     } catch (error) {
       console.error(error)
     }
@@ -517,7 +451,7 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
             label={translations.hashtags}
             name="tags"
             required={true}
-            value={formstate.tags[0].tagsArr}
+            value={formstate.tags}
             onChange={handleInputChangeTags}
           ></Input>
         </div>
@@ -548,7 +482,7 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
                   label={translations.amountof}
                   name={'Value_' + i}
                   required={true}
-                  value={ingredient.amounts[0].value as string}
+                  value={ingredient.amountValue as string}
                   onChange={(e) => handleIngredientValueChange(i, e)}
                 ></Input>
               </div>
@@ -558,7 +492,7 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
                   label={translations.unitof}
                   name={'Unit_' + i}
                   required={false}
-                  value={ingredient.amounts[0].unit as string}
+                  value={ingredient.amountUnit as string}
                   onChange={(e) => handleIngredientUnitChange(i, e)}
                 ></Input>
               </div>

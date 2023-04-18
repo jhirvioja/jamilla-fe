@@ -16,7 +16,7 @@ test.describe('Landing', () => {
     await injectAxe(page)
   })
 
-  test('A11y run', async () => {
+  test('Landing page passes a11y run', async () => {
     await checkA11y(page)
   })
 
@@ -33,7 +33,7 @@ test.describe('Browse', () => {
     await injectAxe(page)
   })
 
-  test('A11y run', async () => {
+  test('Browse page passes A11y run', async () => {
     await checkA11y(page)
   })
 
@@ -50,7 +50,7 @@ test.describe('Browse One Recipe', () => {
     await injectAxe(page)
   })
 
-  test('A11y run', async () => {
+  test('Browse one recipe passes A11y run', async () => {
     await page.click('h1')
     await checkA11y(page)
   })
@@ -68,7 +68,7 @@ test.describe('Add Recipe', () => {
     await injectAxe(page)
   })
 
-  test('A11y run', async () => {
+  test('Add recipe passes A11y run', async () => {
     await checkA11y(page)
   })
 
@@ -85,7 +85,7 @@ test.describe('Search Recipe', () => {
     await injectAxe(page)
   })
 
-  test('A11y run', async () => {
+  test('Search recipe passes A11y run', async () => {
     await checkA11y(page)
   })
 

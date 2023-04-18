@@ -19,9 +19,9 @@ const IngredientList = ({ ingredients }: ModalProps) => {
 
     <li key={i} className="p-2 odd:bg-zinc-100 dark:odd:bg-zinc-800 dark:text-white w-80">
       <>
-        <span className={ingredient.amounts[0].value === '0' ? 'invisible' : 'font-semibold'}>
+        <span className={ingredient.amountValue === '0' ? 'invisible' : 'font-semibold'}>
           <>
-            {ingredient.amounts[0].value} {ingredient.amounts[0].unit}
+            {ingredient.amountValue} {ingredient.amountUnit}
           </>
         </span>{' '}
         {ingredient.name}

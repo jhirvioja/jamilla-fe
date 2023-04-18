@@ -1,39 +1,25 @@
 export type Recipe = {
-  recipeId: number
+  id: string
   name: string
+	date: string
   description: string
   prepTime: string
   cost: number
   imgSrc: string
-  tags: Array<TagsArray>
+  tags: string
   recipeIngredients: Array<RecipeIngredients>
   steps: Array<RecipeSteps>
 }
 
-export type TagsArray = {
-  recipeId: number
-  tagId: number
-  tagsArr: string
-}
-
 export type RecipeIngredients = {
-  recipeId: number
-  recipeIngredientId: number
   name: string
   stock: boolean
-  amounts: Array<Amount>
-}
-
-export type Amount = {
-  recipeIngredientId: number
-  amountId: number
-  value: string | File
-  unit: string | File
+  amountValue: string
+	amountUnit: string
 }
 
 export type RecipeSteps = {
-  recipeId: number
-  stepId: number
+	part: number
   description: string
   steplast: boolean
 }
