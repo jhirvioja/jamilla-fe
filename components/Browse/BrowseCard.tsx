@@ -28,9 +28,9 @@ const BrowseCard = ({ recipe, translations }: RecipeProps) => {
     <div className="max-w-sm lg:min-w-[30%] min-w-full rounded overflow-hidden shadow-lg bg-white dark:bg-zinc-800 dark:text-white">
       <Image src={imageSource} layout="responsive" width={375} height={200} alt="" objectFit="cover" priority={true} />
       <div className="px-6 py-4">
-        <Link href={`/browse/${recipe.recipeId}`} passHref>
+        <Link href={`/browse/${recipe.id}`} passHref>
           <a href="validaccessiblelinkhere">
-            <h1 className="text-xl mb-2 hover:underline underline-offset-8">{recipe.name}</h1>
+            <h2 className="text-xl mb-2 hover:underline underline-offset-8">{recipe.name}</h2>
           </a>
         </Link>
         <div className="pb-2 opacity-50">
@@ -39,7 +39,7 @@ const BrowseCard = ({ recipe, translations }: RecipeProps) => {
         {recipe.description}
       </div>
       <div className="px-6 pt-2 pb-4">
-        <RecipeTags recipetags={recipe.tags[0].tagsArr} />
+        <RecipeTags recipetags={recipe.tags} />
       </div>
     </div>
   )

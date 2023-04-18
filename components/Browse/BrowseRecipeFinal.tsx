@@ -32,14 +32,14 @@ const BrowseRecipeFinal = (recipe: RecipeProps) => {
           <div className="inline-block p-2">
             <Link
               href={
-                recipe.part === '0' ? `/browse/${recipeData.recipeId}` : `/browse/${recipeData.recipeId}?part=${previousPartInThisCase}`
+                recipe.part === '0' ? `/browse/${recipeData.id}` : `/browse/${recipeData.id}?part=${previousPartInThisCase}`
               }
             >
               <button className="bg-green-700 hover:bg-black p-4 pt-2 pb-2 text-white hover:text-white">{translations.previous}</button>
             </Link>
           </div>
           <div className="inline-block p-2">
-            <Link href={`/browse/${recipeData.recipeId}`}>
+            <Link href={`/browse/${recipeData.id}`}>
               <button
                 id="recipe__button--final"
                 className="border hover:bg-black border-black dark:border-white p-4 pt-2 pb-2 text-black dark:text-white hover:text-white"

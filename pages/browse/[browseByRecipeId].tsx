@@ -37,7 +37,7 @@ const BrowseByRecipeId: NextPage = () => {
 
     async function fetchRecipeById() {
       try {
-        const response = await fetch(`${process.env.API_URL}/recipe/${router.query.browseByRecipeId}`)
+        const response = await fetch(`${process.env.API_URL}/Recipes/${router.query.browseByRecipeId}`)
 
         if (!response.ok) {
           console.error('Error: ', response.status, response.statusText)
@@ -106,7 +106,7 @@ const BrowseByRecipeId: NextPage = () => {
           <div className="text-center pb-4">
             <h1>{recipe.name}</h1>
           </div>
-          <BrowseRecipe translations={browseOnePageTranslations} recipe={recipe} />
+          {recipe.id? <BrowseRecipe translations={browseOnePageTranslations} recipe={recipe} /> : ''}
         </div>
       </div>
       <Footer />

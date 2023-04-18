@@ -3,6 +3,8 @@ import { useRouter } from 'next/router'
 import SubmitFormButton from '../SubmitFormButton'
 import Select from '../Select'
 import { Translations } from '../../types/recipes'
+import { deleteCookie } from '../../utils/cookieUtils'
+import { useLocalStorage } from '../../hooks/useLocalStorage'
 
 const EditSettings = ({ translations }: { translations: Translations }) => {
   const router = useRouter()
@@ -15,6 +17,12 @@ const EditSettings = ({ translations }: { translations: Translations }) => {
         return 1
       case translations.light:
         return 2
+			case 0:
+				return translations.os
+			case 1:
+				return translations.dark
+			case 2:
+				return translations.light
     }
   }
 
@@ -26,6 +34,12 @@ const EditSettings = ({ translations }: { translations: Translations }) => {
         return 1
       case translations.bold:
         return 2
+			case 0:
+				return translations.default
+			case 1:
+				return translations.semibold
+			case 2:
+				return translations.bold
     }
   }
 
@@ -37,6 +51,13 @@ const EditSettings = ({ translations }: { translations: Translations }) => {
         return 1
       case translations.loose:
         return 2
+			case 0:
+				return translations.default
+			case 1:
+				return translations.relaxed
+			case 2:
+				return translations.loose
+
     }
   }
 
@@ -48,54 +69,58 @@ const EditSettings = ({ translations }: { translations: Translations }) => {
         return 1
       case translations.widest:
         return 2
+			case 0:
+				return translations.default
+			case 1:
+				return translations.wider
+			case 2:
+				return translations.widest
     }
   }
 
-  const figureOutLang = (props: string | number | undefined) => {
-    switch (props) {
-      case translations.finnishlang:
-        return 0
-      case translations.englishlang:
-        return 1
-      case 'fi':
-        return 0
-      case 'en':
-        return 1
-    }
+  const figureOutLang = (props: string | number) => {
+		if (props) {
+			switch (props) {
+				case translations.finnishlang:
+					return 0
+				case translations.englishlang:
+					return 1
+				case 'fi':
+					return 0
+				case 'en':
+					return 1
+				case 0:
+					return translations.finnishlang
+				case 1:
+					return translations.englishlang
+			}
+		}
+		return 0
   }
 
-  const [formstate, setFormState] = useState({
-    theme: 0,
-    fontweight: 0,
-    lineheight: 0,
-    letterspacing: 0,
+	const [settings, setSettings] = useLocalStorage('settings', {
+    theme: 'init',
+    fontweight: 'init',
+    lineheight: 'init',
+    letterspacing: 'init',
+		lang: 0
   })
 
-  const [langstate, setLangState] = useState(figureOutLang(router.locale))
-
-  useEffect(() => {
-    if (window.localStorage.getItem('settings') !== null) {
-      const settings = JSON.parse(window.localStorage.getItem('settings') as string)
-      setFormState(settings)
-    }
-  }, [])
+	const [loading, setLoading] = useState(true);
 
   const onSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault()
 
-    try {
-      localStorage.settings = JSON.stringify(formstate)
-    } catch (error) {
-      console.log(error)
-      console.log('Could not save settings to localStorage')
-    }
-
-    if (langstate === 0) {
-      document.cookie = 'NEXT_LOCALE=fi'
+    if (settings.lang === 0) {
+			deleteCookie('NEXT_LOCALE', '/', process.env.APP_URL)
+			deleteCookie('NEXT_LOCALE', '/en', process.env.APP_URL)
+			document.cookie = 'NEXT_LOCALE=fi'
       router.push('/settings', '/settings', { locale: 'fi' }).then(() => window.location.reload())
     }
 
-    if (langstate === 1) {
+    if (settings.lang === 1) {
+			deleteCookie('NEXT_LOCALE', '/', process.env.APP_URL)
+			deleteCookie('NEXT_LOCALE', '/en', process.env.APP_URL)
       document.cookie = 'NEXT_LOCALE=en'
       router.push('/settings', '/settings', { locale: 'en' }).then(() => window.location.reload())
     }
@@ -105,41 +130,49 @@ const EditSettings = ({ translations }: { translations: Translations }) => {
     const value = event.target.value
     const name = event.target.name
 
-    setFormState({ ...formstate, [name]: figureOutTheme(value) })
+    setSettings({ ...settings, [name]: figureOutTheme(value) })
   }
 
   const handleSelectWeightChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value
     const name = event.target.name
 
-    setFormState({ ...formstate, [name]: figureOutWeight(value) })
+    setSettings({ ...settings, [name]: figureOutWeight(value) })
   }
 
   const handleSelectHeightChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value
     const name = event.target.name
 
-    setFormState({ ...formstate, [name]: figureOutHeight(value) })
+    setSettings({ ...settings, [name]: figureOutHeight(value) })
   }
 
   const handleSelectSpacingChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value
     const name = event.target.name
 
-    setFormState({ ...formstate, [name]: figureOutSpacing(value) })
+    setSettings({ ...settings, [name]: figureOutSpacing(value) })
   }
 
   const handleSelectLangChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value
+		const name = event.target.name
 
-    setLangState(figureOutLang(value))
+		setSettings({ ...settings, [name]: figureOutLang(value) })
   }
+
+	useEffect(() => {
+    if (settings.theme !== "init" && settings.fontweight !== "init" && settings.lineheight !== "init" && settings.letterspacing !== "init") {
+      setLoading(false);
+    }
+  }, [settings]);
 
   return (
     <div>
       <div className="m-4 dark:text-white">{translations.disclaimer}</div>
       <hr></hr>
-      <form action="/browse">
+			{loading? <></> : 
+			<form action="/browse">
         <div className="m-4">
           <Select
             label={translations.language}
@@ -147,7 +180,7 @@ const EditSettings = ({ translations }: { translations: Translations }) => {
             required={true}
             options={[translations.finnishlang, translations.englishlang]}
             onChange={handleSelectLangChange}
-            selectedItem={langstate}
+						value={figureOutLang(settings.lang)}
           />
         </div>
         <div className="m-4">
@@ -157,7 +190,7 @@ const EditSettings = ({ translations }: { translations: Translations }) => {
             required={true}
             options={[translations.os, translations.dark, translations.light]}
             onChange={handleSelectThemeChange}
-            selectedItem={formstate.theme}
+						value={figureOutTheme(settings.theme)}
           />
         </div>
         <div className="m-4">
@@ -167,7 +200,7 @@ const EditSettings = ({ translations }: { translations: Translations }) => {
             required={true}
             options={[translations.default, translations.semibold, translations.bold]}
             onChange={handleSelectWeightChange}
-            selectedItem={formstate.fontweight}
+						value={figureOutWeight(settings.fontweight)}
           />
         </div>
         <div className="m-4">
@@ -177,7 +210,7 @@ const EditSettings = ({ translations }: { translations: Translations }) => {
             required={true}
             options={[translations.default, translations.relaxed, translations.loose]}
             onChange={handleSelectHeightChange}
-            selectedItem={formstate.lineheight}
+						value={figureOutHeight(settings.lineheight)}
           />
         </div>
         <div className="m-4">
@@ -187,7 +220,7 @@ const EditSettings = ({ translations }: { translations: Translations }) => {
             required={true}
             options={[translations.default, translations.wider, translations.widest]}
             onChange={handleSelectSpacingChange}
-            selectedItem={formstate.letterspacing}
+						value={figureOutSpacing(settings.letterspacing)}
           />
         </div>
         <div className="mt-6 ml-4">
@@ -195,7 +228,7 @@ const EditSettings = ({ translations }: { translations: Translations }) => {
             {translations.save}
           </SubmitFormButton>
         </div>
-      </form>
+      </form>}
     </div>
   )
 }

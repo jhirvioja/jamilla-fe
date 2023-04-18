@@ -7,7 +7,7 @@ type SelectProps = {
   options: string[]
   forwardedRef?: React.RefObject<HTMLSelectElement>
   onChange?: React.ChangeEventHandler
-  value?: string
+  value?: string | number
   selectedItem?: number
 }
 
@@ -29,7 +29,7 @@ const Select = ({ label, required, name, options, onChange, forwardedRef, value,
           value={value}
         >
           {options.map((value, i) => (
-            <option key={i} selected={i === selectedItem ? true : false}>
+            <option key={i} defaultValue={i === selectedItem ? value : ""}>
               {value}
             </option>
           ))}

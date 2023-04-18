@@ -36,52 +36,31 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
   // Init configuration & helper function for the state
   //
 
-  const figureOutCost = (props: string | number) => {
-    switch (props) {
-      case 1:
-        return 1
-      case 2:
-        return 2
-      case 3:
-        return 3
-      case translations.priceselect1:
-        return 1
-      case translations.priceselect2:
-        return 2
-      case translations.priceselect3:
-        return 3
-    }
-  }
+	const figureOutCost = (props: string | number) => {
+		const priceMap = {
+			1: 1,
+			2: 2,
+			3: 3,
+			[translations.priceselect1]: 1,
+			[translations.priceselect2]: 2,
+			[translations.priceselect3]: 3,
+		};
+	
+		return priceMap[props];
+	};
 
   const EmptyIngredientsObj = {
-    recipeId: 0,
-    recipeIngredientId: 0,
     name: '',
+		amountvalue: '',
+		amountunit: '',
     stock: false as boolean,
-    amounts: [
-      {
-        recipeIngredientId: 0,
-        amountId: 0,
-        value: '',
-        unit: '',
-      },
-    ],
   }
 
   const EmptyStepsObj = {
-    recipeId: 0,
-    stepId: 0,
+		part: 0,
     description: '',
     steplast: false as boolean,
   }
-
-  const EmptyTagsObj = [
-    {
-      recipeId: 0,
-      tagId: 0,
-      tagsArr: '',
-    },
-  ]
 
   //
   // State handling starts here
@@ -89,13 +68,13 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
 
   const [loading, setLoading] = useState<string>()
   const [formstate, setFormState] = useState({
-    recipeId: 0,
+		userid: '4f959a9c-b9d1-406b-b1ad-886c550066bf',
     name: '',
     description: '',
     prepTime: '30min',
     cost: 1,
     imgSrc: '',
-    tags: EmptyTagsObj,
+    tags: '',
     recipeIngredients: [EmptyIngredientsObj],
     steps: [EmptyStepsObj],
   })
@@ -113,36 +92,18 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
 
   const handleInputChangeTags = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
-    const name = event.target.name
 
-    setFormState({
-      ...formstate,
-      [name]: [
-        {
-          recipeId: 0,
-          tagId: 0,
-          tagsArr: value,
-        },
-      ],
-    })
+    setFormState({ ...formstate, tags: value })
   }
 
   const handleIngredientNameChange = (i: number, event: React.ChangeEvent<Element>) => {
     const value = (event.target as HTMLInputElement).value
 
     const updObj = {
-      recipeId: 0,
-      recipeIngredientId: 0,
       name: value,
       stock: false,
-      amounts: [
-        {
-          recipeIngredientId: 0,
-          amountId: 0,
-          value: formstate.recipeIngredients[i].amounts[0].value,
-          unit: formstate.recipeIngredients[i].amounts[0].unit,
-        },
-      ],
+			amountunit: formstate.recipeIngredients[i].amountunit,
+			amountvalue: formstate.recipeIngredients[i].amountvalue,
     }
 
     const recipeIngredients = formstate.recipeIngredients.map((item, i2) => (i2 === i ? (item = updObj) : item))
@@ -154,18 +115,10 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
     const value = (event.target as HTMLInputElement).value
 
     const updObj = {
-      recipeId: formstate.recipeIngredients[i].recipeId,
-      recipeIngredientId: formstate.recipeIngredients[i].recipeIngredientId,
       name: formstate.recipeIngredients[i].name,
       stock: false,
-      amounts: [
-        {
-          recipeIngredientId: formstate.recipeIngredients[i].recipeIngredientId,
-          amountId: formstate.recipeIngredients[i].amounts[0].amountId,
-          value: formstate.recipeIngredients[i].amounts[0].value,
-          unit: value,
-        },
-      ],
+			amountunit: value,
+			amountvalue: formstate.recipeIngredients[i].amountvalue,
     }
 
     const recipeIngredients = formstate.recipeIngredients.map((item, i2) => (i2 === i ? (item = updObj) : item))
@@ -177,18 +130,10 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
     const value = (event.target as HTMLInputElement).value
 
     const updObj = {
-      recipeId: formstate.recipeIngredients[i].recipeId,
-      recipeIngredientId: formstate.recipeIngredients[i].recipeIngredientId,
       name: formstate.recipeIngredients[i].name,
       stock: false,
-      amounts: [
-        {
-          recipeIngredientId: formstate.recipeIngredients[i].recipeIngredientId,
-          amountId: formstate.recipeIngredients[i].amounts[0].amountId,
-          value: value,
-          unit: formstate.recipeIngredients[i].amounts[0].unit,
-        },
-      ],
+			amountunit: formstate.recipeIngredients[i].amountunit,
+			amountvalue: value,
     }
 
     const recipeIngredients = formstate.recipeIngredients.map((item, i2) => (i2 === i ? (item = updObj) : item))
@@ -207,8 +152,7 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
     const value = (event.target as HTMLInputElement).value
 
     const updObj = {
-      recipeId: formstate.steps[i].recipeId,
-      stepId: formstate.steps[i].stepId,
+      part: formstate.steps[i].part,
       description: value,
       steplast: formstate.steps[i].steplast,
     }
@@ -240,18 +184,10 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
 
   const onAddIngredientButtonClick = () => {
     const newObj = {
-      recipeId: 0,
-      recipeIngredientId: 0,
       name: '',
       stock: false,
-      amounts: [
-        {
-          recipeIngredientId: 0,
-          amountId: 0,
-          value: '',
-          unit: '',
-        },
-      ],
+      amountunit: '',
+			amountvalue: '',
     }
 
     formstate.recipeIngredients.push(newObj)
@@ -266,24 +202,22 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
     const i = formstate.steps.length - 1
 
     const newObj = {
-      recipeId: 0,
-      stepId: 0,
+      part: i,
       description: '',
       steplast: true,
     }
 
     formstate.steps.push(newObj)
 
-    const updObj = {
-      recipeId: formstate.steps[i].recipeId,
-      stepId: formstate.steps[i].stepId,
-      description: formstate.steps[i].description,
-      steplast: false,
-    }
+    // const updObj = {
+    //   part: formstate.steps[i].part,
+    //   description: formstate.steps[i].description,
+    //   steplast: false,
+    // }
 
-    const steps = formstate.steps.map((item, mapsIterator) => (mapsIterator === i ? (item = updObj) : item))
+    // const steps = formstate.steps.map((item, mapsIterator) => (mapsIterator === i ? (item = newObj) : item))
 
-    setFormState({ ...formstate, steps })
+    // setFormState({ ...formstate, steps })
 
     // At the end change the location to the right header
     // So that speech reader catches up on the right spot focus wise
@@ -294,13 +228,13 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
   const onEmptyButtonClick = () => {
     if (confirm(translations.emptyquestion)) {
       setFormState({
-        recipeId: 0,
+				userid: '4f959a9c-b9d1-406b-b1ad-886c550066bf',
         name: '',
         description: '',
         prepTime: '30min',
         cost: formstate.cost,
         imgSrc: '',
-        tags: EmptyTagsObj,
+        tags: '',
         recipeIngredients: [EmptyIngredientsObj],
         steps: [EmptyStepsObj],
       })
@@ -346,7 +280,7 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
       descRefValidity.setCustomValidity('')
     }
 
-    if (formstate.tags[0].tagsArr.length < 1) {
+    if (formstate.tags.length < 1) {
       tagsRefValidity.setCustomValidity(translations.hashValid)
     } else {
       tagsRefValidity.setCustomValidity('')
@@ -374,6 +308,8 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
 
     // Post a recipe
 
+		postRecipe()
+
     async function postRecipe() {
       if (!formSteps.checkValidity() || !formIngredients.checkValidity() || !formBasics.checkValidity()) {
         setLoading('usererror')
@@ -381,7 +317,7 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
       if (formSteps.checkValidity() && formIngredients.checkValidity() && formBasics.checkValidity()) {
         setLoading('loading')
         try {
-          const response = await fetch(`${process.env.API_URL}/recipe`, {
+          const response = await fetch(`${process.env.API_URL}/Recipes`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -394,14 +330,16 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
             setLoading('error')
           }
 
-          setLoading('done')
+					if (response.ok) {
+						setLoading('done')
+					}
+
         } catch (error) {
           console.error(error)
+					setLoading('error')
         }
       }
     }
-
-    postRecipe()
   }
 
   return (
@@ -454,7 +392,7 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
             label={translations.hashtags}
             name="tags"
             required={true}
-            value={formstate.tags[0].tagsArr}
+            value={formstate.tags}
             onChange={handleInputChangeTags}
           ></Input>
         </div>
@@ -485,7 +423,7 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
                   label={translations.amountof}
                   name={'Value_' + i}
                   required={true}
-                  value={ingredient.amounts[0].value}
+                  value={ingredient.amountvalue}
                   onChange={(e) => handleIngredientValueChange(i, e)}
                 ></Input>
               </div>
@@ -495,7 +433,7 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
                   label={translations.unitof}
                   name={'Unit_' + i}
                   required={false}
-                  value={ingredient.amounts[0].unit}
+                  value={ingredient.amountunit}
                   onChange={(e) => handleIngredientUnitChange(i, e)}
                 ></Input>
               </div>

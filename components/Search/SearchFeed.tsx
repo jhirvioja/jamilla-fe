@@ -6,79 +6,86 @@ import SearchCard from './SearchCard'
 import Input from '../Input'
 import SubmitFormButton from '../SubmitFormButton'
 
-import type { Recipe, TagsArray, Translations } from '../../types/recipes'
+import type { Recipe, Translations } from '../../types/recipes'
 import SkeletonLoading from './SkeletonLoading'
 
 type dataFromApi = {
-  recipesTagsUpd: Array<TagsArray>
-  recipesUpd: Array<Recipe>
+  nameResults: Array<Recipe>
+  tagsResults: Array<Recipe>
 }
 
-// This component / feat uses SWR by Vercel
-// It caches stuff by default and does other neat stuff
-// See more at: https://swr.vercel.app/docs/getting-started
-// Error handling down below taken from: https://swr.vercel.app/docs/error-handling
+// interface FetcherOptions {
+//   url: string;
+//   body?: object;
+// }
 
-const fetcher = async (url: string) => {
-  const response = await fetch(url)
+const fetcher = (url: string) => fetch(url).then(r => r.json())
 
-  // If the status code is not in the range 200-299,
-  // we still try to parse and throw it.
+// const fetcher = async ({ url, body }: FetcherOptions) => {
+// 	console.log(url)
+//   const options: RequestInit = {
+//     method: 'GET',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//   };
 
-  if (!response.ok) {
-    const error = new Error('An error occurred while fetching the data.')
+//   if (body) {
+//     options.method = 'POST';
+//     options.body = JSON.stringify(body);
+//   }
 
-    // Attach extra info to the error object.
+//   const response = await fetch(url, options);
 
-    throw error
-  }
-  return response.json()
-}
+//   if (!response.ok) {
+//     const error = new Error('An error occurred while fetching the data.');
+//     throw error;
+//   }
+
+//   return response.json();
+// };
 
 const SearchFeed = ({ translations }: { translations: Translations }) => {
   const [recipes, setRecipes] = useState<JSX.Element[]>()
-  const [keyword, setKeyword] = useState<string>()
+  const [keyword, setKeyword] = useState<string>("test")
   const [isLoading, setLoading] = useState<boolean>(false)
   const [searchIsDone, setSearchIsDone] = useState<boolean>(false)
 
-  const { data: recipe, error: recipeError } = useSWR(`${process.env.API_URL}/recipes`, fetcher)
-  const { data: searchResults, error: searchError } = useSWR(`${process.env.API_URL}/search?keyword=${keyword}`, fetcher)
+  const { data: recipe, error: recipeError } = useSWR(`${process.env.API_URL}/Recipes`, fetcher)
+  const { data: searchResults, error: searchError } = useSWR(`${process.env.API_URL}/Recipes/search/${keyword}`, fetcher)
 
   const searchRef = createRef() as React.RefObject<HTMLInputElement>
 
-  const findRecipesAndParse = (searchResultsData: dataFromApi, recipe: Array<Recipe>) => {
-    setRecipes(undefined)
+	const findRecipesAndParse = (searchResultsData: dataFromApi, recipes: Recipe[]) => {
+		if (!searchResultsData || !recipes) {
+			setLoading(false);
+			return;
+		}
 
-    if (!searchResultsData && !recipe) {
-      setLoading(false)
-    }
-
-    setSearchIsDone(false)
-    setLoading(true)
-
-    if (searchResultsData && recipe) {
-      const tagsArray = searchResultsData.recipesTagsUpd
-      const recipesArray = searchResultsData.recipesUpd
-
-      const recipeIdsArray: number[] = []
-
-      tagsArray.forEach(function (tags: TagsArray) {
-        recipeIdsArray.push(tags.recipeId)
-      })
-
-      recipesArray.forEach(function (recipe: Recipe) {
-        recipeIdsArray.push(recipe.recipeId)
-      })
-
-      const uniqueIds = [...new Set(recipeIdsArray)]
-      const filteredRecipe = recipe.filter((e) => uniqueIds.includes(e.recipeId))
-      const mappedRecipes = filteredRecipe.map((recipe: Recipe, i: number) => <SearchCard recipe={recipe} key={i} />)
-
-      setRecipes(mappedRecipes)
-      setSearchIsDone(true)
-      setLoading(false)
-    }
-  }
+		console.log(searchResultsData)
+	
+		const recipeIdsSet = new Set<string>();
+	
+		searchResultsData.nameResults.forEach(({ id }) => {
+			recipeIdsSet.add(id);
+		});
+	
+		searchResultsData.tagsResults.forEach(({ id }) => {
+			recipeIdsSet.add(id);
+		});
+	
+		const filteredRecipes = recipes.filter(({ id }) =>
+			recipeIdsSet.has(id)
+		);
+	
+		const mappedRecipes = filteredRecipes.map((recipe, i) => (
+			<SearchCard recipe={recipe} key={i} />
+		));
+	
+		setRecipes(mappedRecipes);
+		setSearchIsDone(true);
+		setLoading(false);
+	};
 
   const onSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault()
@@ -90,16 +97,16 @@ const SearchFeed = ({ translations }: { translations: Translations }) => {
     const searchterm = formData.getAll('search__term')[0] as string
 
     form.checkValidity()
+		form.reportValidity()
 
     if (searchterm.length < 1) {
       searchRefValidity.setCustomValidity(translations.searchValid)
     } else {
       searchRefValidity.setCustomValidity('')
+			setKeyword(searchterm)
     }
 
-    form.reportValidity()
 
-    setKeyword(searchterm)
   }
 
   useEffect(() => {
