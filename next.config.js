@@ -7,9 +7,9 @@ module.exports = {
     outputStandalone: true,
   },
 	env: {
-		APP_URL: 'http://localhost:3000',
-		API_URL: 'https://localhost:49153/api',
-		USER_ID: '4f959a9c-b9d1-406b-b1ad-886c550066bf'
+		APP_URL: process.env.APP_URL,
+		API_URL: process.env.API_URL,
+		USER_ID: process.env.USER_ID
 	},
   images: {
     domains: [ // Not sure if this is necessary, but I am going to assume it is

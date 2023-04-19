@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 const AmountOfRecipes = ({ text1, text2, amounterror }: { text1: string; text2: string; amounterror: string }) => {
-  const [recipesLength, setRecipesLength] = useState<number | string>("o")
+  const [recipesLength, setRecipesLength] = useState<number | string>()
 
   useEffect(() => {
     fetchAmountOfRecipes()
@@ -39,16 +39,23 @@ const AmountOfRecipes = ({ text1, text2, amounterror }: { text1: string; text2: 
         </p>
       </>
     )
+  }
+
+  if (recipesLength === undefined) {
+    return (
+      <>
+        <p>{amounterror}</p>
+      </>
+    )
   } else {
-      return (
-        <>
-          <p>
-            {text1} {recipesLength} {text2}
-          </p>
-        </>
-      )
-    }
-  
+    return (
+      <>
+        <p>
+          {text1} {recipesLength} {text2}
+        </p>
+      </>
+    )
+  }
 }
 
 export default AmountOfRecipes

@@ -29,7 +29,7 @@ const Select = ({ label, required, name, options, onChange, forwardedRef, value,
           value={value}
         >
           {options.map((value, i) => (
-            <option key={i} defaultValue={i === selectedItem ? value : ""}>
+            <option key={i} defaultValue={i === selectedItem ? value : ''}>
               {value}
             </option>
           ))}

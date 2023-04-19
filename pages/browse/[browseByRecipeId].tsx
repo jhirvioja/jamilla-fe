@@ -106,7 +106,7 @@ const BrowseByRecipeId: NextPage = () => {
           <div className="text-center pb-4">
             <h1>{recipe.name}</h1>
           </div>
-          {recipe.id? <BrowseRecipe translations={browseOnePageTranslations} recipe={recipe} /> : ''}
+          {recipe.id ? <BrowseRecipe translations={browseOnePageTranslations} recipe={recipe} /> : ''}
         </div>
       </div>
       <Footer />

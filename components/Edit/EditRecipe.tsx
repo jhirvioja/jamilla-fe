@@ -39,26 +39,26 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
   // Init configuration for the state
   //
 
-	const figureOutCost = (props: string | number) => {
-		const priceMap = {
-			1: 1,
-			2: 2,
-			3: 3,
-			[translations.priceselect1]: 1,
-			[translations.priceselect2]: 2,
-			[translations.priceselect3]: 3,
-		};
-	
-		return priceMap[props];
-	};
+  const figureOutCost = (props: string | number) => {
+    const priceMap = {
+      1: 1,
+      2: 2,
+      3: 3,
+      [translations.priceselect1]: 1,
+      [translations.priceselect2]: 2,
+      [translations.priceselect3]: 3,
+    }
+
+    return priceMap[props]
+  }
 
   const freshIngredientsObj = recipe.recipeIngredients.map(
     (item, i) =>
       (item = {
         name: recipe.recipeIngredients[i].name,
         stock: false as boolean,
-				amountValue: recipe.recipeIngredients[i].amountValue,
-				amountUnit: recipe.recipeIngredients[i].amountUnit
+        amountValue: recipe.recipeIngredients[i].amountValue,
+        amountUnit: recipe.recipeIngredients[i].amountUnit,
       }),
   )
 
@@ -78,8 +78,8 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
   const [loading, setLoading] = useState<string>()
   const [formstate, setFormState] = useState({
     id: recipe.id,
-		userid: '4f959a9c-b9d1-406b-b1ad-886c550066bf',
-		date: recipe.date,
+    userid: '4f959a9c-b9d1-406b-b1ad-886c550066bf',
+    date: recipe.date,
     name: recipe.name,
     description: recipe.description,
     prepTime: '30min',
@@ -123,8 +123,8 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
     const updObj = {
       name: value,
       stock: false,
-			amountValue: formstate.recipeIngredients[i].amountValue,
-			amountUnit: formstate.recipeIngredients[i].amountUnit,
+      amountValue: formstate.recipeIngredients[i].amountValue,
+      amountUnit: formstate.recipeIngredients[i].amountUnit,
     }
 
     const recipeIngredients = formstate.recipeIngredients.map((item, i2) => (i2 === i ? (item = updObj) : item))
@@ -139,7 +139,7 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
       name: formstate.recipeIngredients[i].name,
       stock: false,
       amountValue: formstate.recipeIngredients[i].amountValue,
-			amountUnit: value
+      amountUnit: value,
     }
 
     const recipeIngredients = formstate.recipeIngredients.map((item, i2) => (i2 === i ? (item = updObj) : item))
@@ -153,8 +153,8 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
     const updObj = {
       name: formstate.recipeIngredients[i].name,
       stock: false,
-			amountValue: value,
-			amountUnit: formstate.recipeIngredients[i].amountUnit
+      amountValue: value,
+      amountUnit: formstate.recipeIngredients[i].amountUnit,
     }
 
     const recipeIngredients = formstate.recipeIngredients.map((item, i2) => (i2 === i ? (item = updObj) : item))
@@ -173,7 +173,7 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
     const value = (event.target as HTMLInputElement).value
 
     const updObj = {
-			part: i,
+      part: i,
       description: value,
       steplast: formstate.steps[i].steplast,
     }
@@ -207,8 +207,8 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
     const newObj = {
       name: '',
       stock: false,
-			amountValue: '',
-			amountUnit: ''
+      amountValue: '',
+      amountUnit: '',
     }
 
     formstate.recipeIngredients.push(newObj)
@@ -223,7 +223,7 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
     const i = formstate.steps.length - 1
 
     const newObj = {
-			part: 0,
+      part: 0,
       description: '',
       steplast: true,
     }
@@ -231,7 +231,7 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
     formstate.steps.push(newObj)
 
     const updObj = {
-			part: i,
+      part: i,
       description: formstate.steps[i].description,
       steplast: false,
     }
@@ -350,13 +350,13 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
 
           if (!response.ok) {
             console.error('Error:', response.status, response.statusText)
-						setLoading('error')
+            setLoading('error')
           }
 
-					if (response.ok) {
-						deleteOriginalRecipeFromLocalStorage()
-						setLoading('done')
-					}
+          if (response.ok) {
+            deleteOriginalRecipeFromLocalStorage()
+            setLoading('done')
+          }
         } catch (error) {
           console.error(error)
         }
@@ -397,12 +397,12 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
 
       if (!response.ok) {
         console.error('Error:', response.status, response.statusText)
-				setLoading('error')
+        setLoading('error')
       }
 
-			if (response.ok) {
-				window.location.href = `${process.env.APP_URL}/browse/`
-			}
+      if (response.ok) {
+        window.location.href = `${process.env.APP_URL}/browse/`
+      }
     } catch (error) {
       console.error(error)
     }

@@ -25,7 +25,7 @@ const Browse: NextPage = () => {
       <NavBar />
       <div className="container mx-auto">
         <div className="main bg-zinc-100 dark:bg-zinc-900" role="main">
-				<h1 className="text-center mb-4">{pageTitle}</h1>
+          <h1 className="text-center mb-4">{pageTitle}</h1>
           <BrowseFeed translations={translations} />
         </div>
       </div>

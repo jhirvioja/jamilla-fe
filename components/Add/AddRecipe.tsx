@@ -36,28 +36,28 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
   // Init configuration & helper function for the state
   //
 
-	const figureOutCost = (props: string | number) => {
-		const priceMap = {
-			1: 1,
-			2: 2,
-			3: 3,
-			[translations.priceselect1]: 1,
-			[translations.priceselect2]: 2,
-			[translations.priceselect3]: 3,
-		};
-	
-		return priceMap[props];
-	};
+  const figureOutCost = (props: string | number) => {
+    const priceMap = {
+      1: 1,
+      2: 2,
+      3: 3,
+      [translations.priceselect1]: 1,
+      [translations.priceselect2]: 2,
+      [translations.priceselect3]: 3,
+    }
+
+    return priceMap[props]
+  }
 
   const EmptyIngredientsObj = {
     name: '',
-		amountvalue: '',
-		amountunit: '',
+    amountvalue: '',
+    amountunit: '',
     stock: false as boolean,
   }
 
   const EmptyStepsObj = {
-		part: 0,
+    part: 0,
     description: '',
     steplast: false as boolean,
   }
@@ -68,7 +68,7 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
 
   const [loading, setLoading] = useState<string>()
   const [formstate, setFormState] = useState({
-		userid: '4f959a9c-b9d1-406b-b1ad-886c550066bf',
+    userid: '4f959a9c-b9d1-406b-b1ad-886c550066bf',
     name: '',
     description: '',
     prepTime: '30min',
@@ -102,8 +102,8 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
     const updObj = {
       name: value,
       stock: false,
-			amountunit: formstate.recipeIngredients[i].amountunit,
-			amountvalue: formstate.recipeIngredients[i].amountvalue,
+      amountunit: formstate.recipeIngredients[i].amountunit,
+      amountvalue: formstate.recipeIngredients[i].amountvalue,
     }
 
     const recipeIngredients = formstate.recipeIngredients.map((item, i2) => (i2 === i ? (item = updObj) : item))
@@ -117,8 +117,8 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
     const updObj = {
       name: formstate.recipeIngredients[i].name,
       stock: false,
-			amountunit: value,
-			amountvalue: formstate.recipeIngredients[i].amountvalue,
+      amountunit: value,
+      amountvalue: formstate.recipeIngredients[i].amountvalue,
     }
 
     const recipeIngredients = formstate.recipeIngredients.map((item, i2) => (i2 === i ? (item = updObj) : item))
@@ -132,8 +132,8 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
     const updObj = {
       name: formstate.recipeIngredients[i].name,
       stock: false,
-			amountunit: formstate.recipeIngredients[i].amountunit,
-			amountvalue: value,
+      amountunit: formstate.recipeIngredients[i].amountunit,
+      amountvalue: value,
     }
 
     const recipeIngredients = formstate.recipeIngredients.map((item, i2) => (i2 === i ? (item = updObj) : item))
@@ -187,7 +187,7 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
       name: '',
       stock: false,
       amountunit: '',
-			amountvalue: '',
+      amountvalue: '',
     }
 
     formstate.recipeIngredients.push(newObj)
@@ -228,7 +228,7 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
   const onEmptyButtonClick = () => {
     if (confirm(translations.emptyquestion)) {
       setFormState({
-				userid: '4f959a9c-b9d1-406b-b1ad-886c550066bf',
+        userid: '4f959a9c-b9d1-406b-b1ad-886c550066bf',
         name: '',
         description: '',
         prepTime: '30min',
@@ -308,7 +308,7 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
 
     // Post a recipe
 
-		postRecipe()
+    postRecipe()
 
     async function postRecipe() {
       if (!formSteps.checkValidity() || !formIngredients.checkValidity() || !formBasics.checkValidity()) {
@@ -330,13 +330,12 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
             setLoading('error')
           }
 
-					if (response.ok) {
-						setLoading('done')
-					}
-
+          if (response.ok) {
+            setLoading('done')
+          }
         } catch (error) {
           console.error(error)
-					setLoading('error')
+          setLoading('error')
         }
       }
     }

@@ -15,52 +15,64 @@ type RecipeProps = {
 }
 
 const BrowseRecipe = ({ recipe, translations }: RecipeProps) => {
-	const [recipeLocalStorage, setRecipeToLocalStorage] = useLocalStorage<Recipe>("recipe_" + recipe.id, recipe)
+  const [recipeLocalStorage, setRecipeToLocalStorage] = useLocalStorage<Recipe>('recipe_' + recipe.id, recipe)
 
   const handleClick = (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     const ingredientEl = document.getElementById(event.currentTarget.id)
 
-		if (!ingredientEl) {
-			return;
-		}
-		
+    if (!ingredientEl) {
+      return
+    }
+
     const ingredientId = ingredientEl?.id.substring(3, ingredientEl?.id.length)
-		const ingredientIdInt = parseInt(ingredientId)
+    const ingredientIdInt = parseInt(ingredientId)
 
     if (ingredientEl?.className === '') {
       const recipeIngredients = recipeLocalStorage.recipeIngredients
-			const updatedRecipeIngredientPart = { ...recipeIngredients, [ingredientIdInt]: {...recipeIngredients[ingredientIdInt], stock: true} }
+      const updatedRecipeIngredientPart = {
+        ...recipeIngredients,
+        [ingredientIdInt]: { ...recipeIngredients[ingredientIdInt], stock: true },
+      }
       const updatedLocalRecipeTrue = { ...recipeLocalStorage, recipeIngredients: updatedRecipeIngredientPart }
       setRecipeToLocalStorage(updatedLocalRecipeTrue)
     } else {
       const recipeIngredientsFalse = recipeLocalStorage.recipeIngredients
-      const updatedRecipeIngredientPartFalse = { ...recipeIngredientsFalse, [ingredientIdInt]: {...recipeIngredientsFalse[ingredientIdInt], stock: false} }
+      const updatedRecipeIngredientPartFalse = {
+        ...recipeIngredientsFalse,
+        [ingredientIdInt]: { ...recipeIngredientsFalse[ingredientIdInt], stock: false },
+      }
       const updatedLocalRecipeFalse = { ...recipeLocalStorage, recipeIngredients: updatedRecipeIngredientPartFalse }
       setRecipeToLocalStorage(updatedLocalRecipeFalse)
     }
   }
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLSpanElement>) => {
-		const ingredientEl = document.getElementById(event.currentTarget.id)
+    const ingredientEl = document.getElementById(event.currentTarget.id)
 
-		if (!ingredientEl) {
-			return;
-		}
+    if (!ingredientEl) {
+      return
+    }
 
-		const ingredientId = ingredientEl?.id.substring(3, ingredientEl?.id.length)
-		const ingredientIdInt = parseInt(ingredientId)
+    const ingredientId = ingredientEl?.id.substring(3, ingredientEl?.id.length)
+    const ingredientIdInt = parseInt(ingredientId)
 
     if (event.key === 'Enter') {
       if (ingredientEl?.className === '') {
-				const recipeIngredients = recipeLocalStorage.recipeIngredients
-				const updatedRecipeIngredientPart = { ...recipeIngredients, [ingredientIdInt]: {...recipeIngredients[ingredientIdInt], stock: true} }
-				const updatedLocalRecipeTrue = { ...recipeLocalStorage, recipeIngredients: updatedRecipeIngredientPart }
-				setRecipeToLocalStorage(updatedLocalRecipeTrue)
+        const recipeIngredients = recipeLocalStorage.recipeIngredients
+        const updatedRecipeIngredientPart = {
+          ...recipeIngredients,
+          [ingredientIdInt]: { ...recipeIngredients[ingredientIdInt], stock: true },
+        }
+        const updatedLocalRecipeTrue = { ...recipeLocalStorage, recipeIngredients: updatedRecipeIngredientPart }
+        setRecipeToLocalStorage(updatedLocalRecipeTrue)
       } else {
-				const recipeIngredientsFalse = recipeLocalStorage.recipeIngredients
-				const updatedRecipeIngredientPartFalse = { ...recipeIngredientsFalse, [ingredientIdInt]: {...recipeIngredientsFalse[ingredientIdInt], stock: false} }
-				const updatedLocalRecipeFalse = { ...recipeLocalStorage, recipeIngredients: updatedRecipeIngredientPartFalse }
-				setRecipeToLocalStorage(updatedLocalRecipeFalse)
+        const recipeIngredientsFalse = recipeLocalStorage.recipeIngredients
+        const updatedRecipeIngredientPartFalse = {
+          ...recipeIngredientsFalse,
+          [ingredientIdInt]: { ...recipeIngredientsFalse[ingredientIdInt], stock: false },
+        }
+        const updatedLocalRecipeFalse = { ...recipeLocalStorage, recipeIngredients: updatedRecipeIngredientPartFalse }
+        setRecipeToLocalStorage(updatedLocalRecipeFalse)
       }
     }
   }

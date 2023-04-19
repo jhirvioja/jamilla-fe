@@ -19,7 +19,7 @@ type dataFromApi = {
 //   body?: object;
 // }
 
-const fetcher = (url: string) => fetch(url).then(r => r.json())
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 // const fetcher = async ({ url, body }: FetcherOptions) => {
 // 	console.log(url)
@@ -47,7 +47,7 @@ const fetcher = (url: string) => fetch(url).then(r => r.json())
 
 const SearchFeed = ({ translations }: { translations: Translations }) => {
   const [recipes, setRecipes] = useState<JSX.Element[]>()
-  const [keyword, setKeyword] = useState<string>("test")
+  const [keyword, setKeyword] = useState<string>('test')
   const [isLoading, setLoading] = useState<boolean>(false)
   const [searchIsDone, setSearchIsDone] = useState<boolean>(false)
 
@@ -56,36 +56,32 @@ const SearchFeed = ({ translations }: { translations: Translations }) => {
 
   const searchRef = createRef() as React.RefObject<HTMLInputElement>
 
-	const findRecipesAndParse = (searchResultsData: dataFromApi, recipes: Recipe[]) => {
-		if (!searchResultsData || !recipes) {
-			setLoading(false);
-			return;
-		}
+  const findRecipesAndParse = (searchResultsData: dataFromApi, recipes: Recipe[]) => {
+    if (!searchResultsData || !recipes) {
+      setLoading(false)
+      return
+    }
 
-		console.log(searchResultsData)
-	
-		const recipeIdsSet = new Set<string>();
-	
-		searchResultsData.nameResults.forEach(({ id }) => {
-			recipeIdsSet.add(id);
-		});
-	
-		searchResultsData.tagsResults.forEach(({ id }) => {
-			recipeIdsSet.add(id);
-		});
-	
-		const filteredRecipes = recipes.filter(({ id }) =>
-			recipeIdsSet.has(id)
-		);
-	
-		const mappedRecipes = filteredRecipes.map((recipe, i) => (
-			<SearchCard recipe={recipe} key={i} />
-		));
-	
-		setRecipes(mappedRecipes);
-		setSearchIsDone(true);
-		setLoading(false);
-	};
+    console.log(searchResultsData)
+
+    const recipeIdsSet = new Set<string>()
+
+    searchResultsData.nameResults.forEach(({ id }) => {
+      recipeIdsSet.add(id)
+    })
+
+    searchResultsData.tagsResults.forEach(({ id }) => {
+      recipeIdsSet.add(id)
+    })
+
+    const filteredRecipes = recipes.filter(({ id }) => recipeIdsSet.has(id))
+
+    const mappedRecipes = filteredRecipes.map((recipe, i) => <SearchCard recipe={recipe} key={i} />)
+
+    setRecipes(mappedRecipes)
+    setSearchIsDone(true)
+    setLoading(false)
+  }
 
   const onSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault()
@@ -97,16 +93,14 @@ const SearchFeed = ({ translations }: { translations: Translations }) => {
     const searchterm = formData.getAll('search__term')[0] as string
 
     form.checkValidity()
-		form.reportValidity()
+    form.reportValidity()
 
     if (searchterm.length < 1) {
       searchRefValidity.setCustomValidity(translations.searchValid)
     } else {
       searchRefValidity.setCustomValidity('')
-			setKeyword(searchterm)
+      setKeyword(searchterm)
     }
-
-
   }
 
   useEffect(() => {

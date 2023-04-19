@@ -41,29 +41,29 @@ const BrowseFeed = ({ translations }: { translations: Translations }) => {
     setLoadingMoreDone(false)
     fetchMoreRecipes()
 
-		async function fetchMoreRecipes() {
-			try {
-				const response = await fetch(`${process.env.API_URL}/Recipes/pagination/${skip}/5`)
-	
-				if (!response.ok) {
-					setError(true)
-					console.error(error)
-				}
-	
-				const newData = await response.json()
-	
-				if (newData.length === 0) {
-					setPossibleToFetchRecipes(false)
-				} else {
-					setData((current) => [...current, ...newData])
-					setLoadingMoreDone(true)
-					setSkip((current) => current + 5)
-				}
-			} catch (error) {
-				setError(true)
-				console.error(error)
-			}
-		}
+    async function fetchMoreRecipes() {
+      try {
+        const response = await fetch(`${process.env.API_URL}/Recipes/pagination/${skip}/5`)
+
+        if (!response.ok) {
+          setError(true)
+          console.error(error)
+        }
+
+        const newData = await response.json()
+
+        if (newData.length === 0) {
+          setPossibleToFetchRecipes(false)
+        } else {
+          setData((current) => [...current, ...newData])
+          setLoadingMoreDone(true)
+          setSkip((current) => current + 5)
+        }
+      } catch (error) {
+        setError(true)
+        console.error(error)
+      }
+    }
   }
 
   return (

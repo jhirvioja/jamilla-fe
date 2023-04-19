@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { appWithTranslation } from 'next-i18next'
@@ -14,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     fontweight: 0,
     lineheight: 0,
     letterspacing: 0,
-		lang: 0
+    lang: 0,
   })
   const [darkMode, setDarkMode] = useState(false)
 

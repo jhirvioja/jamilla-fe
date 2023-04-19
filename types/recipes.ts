@@ -1,7 +1,7 @@
 export type Recipe = {
   id: string
   name: string
-	date: string
+  date: string
   description: string
   prepTime: string
   cost: number
@@ -15,11 +15,11 @@ export type RecipeIngredients = {
   name: string
   stock: boolean
   amountValue: string
-	amountUnit: string
+  amountUnit: string
 }
 
 export type RecipeSteps = {
-	part: number
+  part: number
   description: string
   steplast: boolean
 }
