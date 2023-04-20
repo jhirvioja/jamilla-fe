@@ -61,6 +61,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 # Copy PM2 ecosystem config file
 COPY --from=builder /app/ecosystem.config.js ./
+COPY --from=builder /app/node_modules ./node_modules
 
 USER nextjs
 
