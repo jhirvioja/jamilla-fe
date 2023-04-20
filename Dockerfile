@@ -58,10 +58,9 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 
 USER nextjs
 
 EXPOSE 3000
 
-CMD ["node_modules/next/dist/bin/next", "start", "-p", "3000"]
+CMD ["node_modules/.bin/next", "start", "-p", "3000"]
