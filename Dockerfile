@@ -63,4 +63,4 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-CMD ["pm2-runtime", "server.js"]
+CMD ["pm2-runtime", "ecosystem.config.js"]

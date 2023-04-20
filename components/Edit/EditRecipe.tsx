@@ -1,7 +1,5 @@
 import React, { useState, createRef } from 'react'
 
-import { useRouter } from 'next/router'
-
 import type { Recipe, Translations } from '../../types/recipes'
 
 import Input from '../Input'
