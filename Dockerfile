@@ -1,14 +1,5 @@
 FROM node:18-alpine AS base
 
-# Define environment variables
-ARG APP_URL
-ARG API_URL
-ARG USER_ID
-
-ENV APP_URL=$APP_URL
-ENV API_URL=$API_URL
-ENV USER_ID=$USER_ID
-
 # Install dependencies only when needed
 FROM base AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
