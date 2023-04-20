@@ -13,8 +13,6 @@ import Spinner from '../Spinner'
 import Select from '../Select'
 
 export const EditRecipe = ({ translations, recipe }: { translations: Translations; recipe: Recipe }) => {
-  const router = useRouter()
-
   //
   // Screen reader helpers
   //

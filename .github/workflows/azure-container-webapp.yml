@@ -2,7 +2,7 @@ name: Build & push image to ACR & deploy to Azure App Service
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
