@@ -8,7 +8,7 @@ const AmountOfRecipes = ({ text1, text2, amounterror }: { text1: string; text2: 
 
     async function fetchAmountOfRecipes() {
       try {
-        const response = await fetch(`${process.env.API_URL}/Recipes/amount/${process.env.USER_ID}`)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Recipes/amount/${process.env.NEXT_PUBLIC_USER_ID}`)
 
         if (!response.ok) {
           console.error('Error:', response.status, response.statusText)

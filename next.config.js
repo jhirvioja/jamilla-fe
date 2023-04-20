@@ -6,11 +6,6 @@ module.exports = {
 	experimental: {
     outputStandalone: true,
   },
-	env: {
-		APP_URL: process.env.APP_URL,
-		API_URL: process.env.API_URL,
-		USER_ID: process.env.USER_ID
-	},
   images: {
     domains: [ // Not sure if this is necessary, but I am going to assume it is
       'https://i.imgur.com',

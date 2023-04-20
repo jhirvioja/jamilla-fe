@@ -51,8 +51,8 @@ const SearchFeed = ({ translations }: { translations: Translations }) => {
   const [isLoading, setLoading] = useState<boolean>(false)
   const [searchIsDone, setSearchIsDone] = useState<boolean>(false)
 
-  const { data: recipe, error: recipeError } = useSWR(`${process.env.API_URL}/Recipes`, fetcher)
-  const { data: searchResults, error: searchError } = useSWR(`${process.env.API_URL}/Recipes/search/${keyword}`, fetcher)
+  const { data: recipe, error: recipeError } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/Recipes`, fetcher)
+  const { data: searchResults, error: searchError } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/Recipes/search/${keyword}`, fetcher)
 
   const searchRef = createRef() as React.RefObject<HTMLInputElement>
 

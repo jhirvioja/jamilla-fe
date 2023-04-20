@@ -22,7 +22,7 @@ An a11y friendly React/Next.js + Tailwind CSS Recipe Book App!
 
 ## Local Deployment
 
-Backend can be found at a [different repo](https://github.com/jhirvioja/jamilla-be) and is advised to deploy first. Take the backend address and add it to `next.config.js` env-settings as `API_URL`.
+Backend can be found at a [different repo](https://github.com/jhirvioja/jamilla-be) and is advised to deploy first. Take the backend address and add it to `next.config.js` env-settings as `NEXT_PUBLIC_API_URL`.
 
 For the frontend:
 

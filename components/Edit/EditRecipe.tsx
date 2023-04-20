@@ -336,7 +336,7 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
         setLoading('loading')
 
         try {
-          const response = await fetch(`${process.env.API_URL}/Recipes/${recipe.id}`, {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Recipes/${recipe.id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -384,7 +384,7 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
 
   async function deleteRecipe() {
     try {
-      const response = await fetch(`${process.env.API_URL}/Recipes/${recipe.id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Recipes/${recipe.id}`, {
         method: 'DELETE',
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
@@ -397,7 +397,7 @@ export const EditRecipe = ({ translations, recipe }: { translations: Translation
       }
 
       if (response.ok) {
-        window.location.href = `${process.env.APP_URL}/browse/`
+        window.location.href = `${process.env.NEXT_PUBLIC_APP_URL}/browse/`
       }
     } catch (error) {
       console.error(error)
