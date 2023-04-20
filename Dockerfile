@@ -63,4 +63,4 @@ USER nextjs
 
 EXPOSE 8080
 
-CMD ["node_modules/next/dist/bin/next", "start"]
+CMD ["node_modules/next/dist/bin/next", "start", "-p", "8080"]
