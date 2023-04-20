@@ -317,7 +317,7 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
       if (formSteps.checkValidity() && formIngredients.checkValidity() && formBasics.checkValidity()) {
         setLoading('loading')
         try {
-          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Recipes`, {
+          const response = await fetch(`${process.env.API_URL}/Recipes`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

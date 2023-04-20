@@ -34,7 +34,7 @@ const Edit: NextPage = () => {
 
     async function fetchRecipeById() {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Recipes/${router.query.editByRecipeId}`)
+        const response = await fetch(`${process.env.API_URL}/Recipes/${router.query.editByRecipeId}`)
 
         if (!response.ok) {
           console.error('Error: ', response.status, response.statusText)

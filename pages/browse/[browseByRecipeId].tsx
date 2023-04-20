@@ -37,7 +37,7 @@ const BrowseByRecipeId: NextPage = () => {
 
     async function fetchRecipeById() {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Recipes/${router.query.browseByRecipeId}`)
+        const response = await fetch(`${process.env.API_URL}/Recipes/${router.query.browseByRecipeId}`)
 
         if (!response.ok) {
           console.error('Error: ', response.status, response.statusText)

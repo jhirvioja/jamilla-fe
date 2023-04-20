@@ -111,15 +111,15 @@ const EditSettings = ({ translations }: { translations: Translations }) => {
     event.preventDefault()
 
     if (settings.lang === 0) {
-      deleteCookie('NEXT_LOCALE', '/', process.env.NEXT_PUBLIC_APP_URL)
-      deleteCookie('NEXT_LOCALE', '/en', process.env.NEXT_PUBLIC_APP_URL)
+      deleteCookie('NEXT_LOCALE', '/', process.env.APP_URL)
+      deleteCookie('NEXT_LOCALE', '/en', process.env.APP_URL)
       document.cookie = 'NEXT_LOCALE=fi'
       router.push('/settings', '/settings', { locale: 'fi' }).then(() => window.location.reload())
     }
 
     if (settings.lang === 1) {
-      deleteCookie('NEXT_LOCALE', '/', process.env.NEXT_PUBLIC_APP_URL)
-      deleteCookie('NEXT_LOCALE', '/en', process.env.NEXT_PUBLIC_APP_URL)
+      deleteCookie('NEXT_LOCALE', '/', process.env.APP_URL)
+      deleteCookie('NEXT_LOCALE', '/en', process.env.APP_URL)
       document.cookie = 'NEXT_LOCALE=en'
       router.push('/settings', '/settings', { locale: 'en' }).then(() => window.location.reload())
     }

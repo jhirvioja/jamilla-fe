@@ -19,7 +19,7 @@ const BrowseFeed = ({ translations }: { translations: Translations }) => {
 
     async function fetchRecipes() {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Recipes/pagination/0/5`)
+        const response = await fetch(`${process.env.API_URL}/Recipes/pagination/0/5`)
 
         if (!response.ok) {
           setError(true)
@@ -43,7 +43,7 @@ const BrowseFeed = ({ translations }: { translations: Translations }) => {
 
     async function fetchMoreRecipes() {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Recipes/pagination/${skip}/5`)
+        const response = await fetch(`${process.env.API_URL}/Recipes/pagination/${skip}/5`)
 
         if (!response.ok) {
           setError(true)
