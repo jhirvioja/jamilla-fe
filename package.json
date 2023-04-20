@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "pm2 start ecosystem.config.js --no-daemon",
-    "start:local": "next start",
+    "start": "next start",
     "lint": "npx eslint .",
     "stylelint": "npx stylelint \"**/*.css\"",
     "test:e2e": "npx playwright test --reporter=list --project='chromium' && npx playwright test --reporter=list --project='firefox' && npx playwright test --reporter=list --project='webkit'",
