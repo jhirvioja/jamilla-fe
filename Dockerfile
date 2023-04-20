@@ -65,4 +65,4 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-CMD ["pm2", "start", "ecosystem.config.js", "--". "no-daemon"]
+CMD ["pm2", "start", "ecosystem.config.js", "--no-daemon"]
