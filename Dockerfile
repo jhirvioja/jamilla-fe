@@ -18,6 +18,11 @@ RUN \
 
 # Rebuild the source code only when needed
 FROM base AS builder
+
+ENV API_URL=https://app-jamilla-be.azurewebsites.net/api
+ENV APP_URL=https://jamilla.azurewebsites.net
+ENV USER_ID=4f959a9c-b9d1-406b-b1ad-886c550066bf
+
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -53,7 +58,7 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/init.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/init.sh
 
-# USER nextjs
+USER nextjs
 
 EXPOSE 3000
 
