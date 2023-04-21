@@ -31,6 +31,9 @@ jobs:
           docker build . -t jamilla.azurecr.io/jamilla-fe:${{ github.sha }}
           docker push jamilla.azurecr.io/jamilla-fe:${{ github.sha }}
 
+      - name: Pull image from Azure Container Registry
+        run: docker-compose pull jamilla.azurecr.io/jamilla-fe:${{ github.sha }}
+
       - name: Deploy to Azure App Service
         uses: azure/webapps-deploy@v2
         with:
