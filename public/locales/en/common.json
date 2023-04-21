@@ -95,6 +95,7 @@
     "amountofrecipes1": "You have currently added",
     "amountofrecipes2": "recipes from the max amount of 250.",
     "amounterror": "Error loading the amount of recipes from database.",
+    "amountloading": "Loading the amount of recipes..",
     "recipesaved": "Recipe saved!",
     "checktheform": "Please double check the form",
     "errormsg": "An error has occured",

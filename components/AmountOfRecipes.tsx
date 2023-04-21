@@ -1,7 +1,18 @@
 import React, { useEffect, useState } from 'react'
 
-const AmountOfRecipes = ({ text1, text2, amounterror }: { text1: string; text2: string; amounterror: string }) => {
+const AmountOfRecipes = ({
+  text1,
+  text2,
+  amounterror,
+  amountloading,
+}: {
+  text1: string
+  text2: string
+  amounterror: string
+  amountloading: string
+}) => {
   const [recipesLength, setRecipesLength] = useState<number | string>()
+  const [status, setStatus] = useState<string>()
 
   useEffect(() => {
     fetchAmountOfRecipes()
@@ -18,44 +29,49 @@ const AmountOfRecipes = ({ text1, text2, amounterror }: { text1: string; text2: 
         setRecipesLength(data)
       } catch (error) {
         console.error(error)
+        setStatus('error')
       }
     }
   }, [])
 
-  if (recipesLength === 0) {
-    return (
-      <>
-        <p>
-          {text1} <span className="text-green-700 font-bold">0</span> {text2}
-        </p>
-      </>
-    )
-  }
-  if (recipesLength === 250) {
-    return (
-      <>
-        <p>
-          {text1} <span className="text-red-500 font-bold">250</span> {text2}
-        </p>
-      </>
-    )
-  }
-
-  if (recipesLength === undefined) {
+  if (status === 'error') {
     return (
       <>
         <p>{amounterror}</p>
       </>
     )
-  } else {
+  }
+
+  if (!recipesLength) {
     return (
       <>
-        <p>
-          {text1} {recipesLength} {text2}
-        </p>
+        <p>{amountloading}</p>
       </>
     )
   }
+
+  if (recipesLength) {
+    if (recipesLength === 0) {
+      return (
+        <>
+          <p>
+            {text1} <span className="text-green-700 font-bold">0</span> {text2}
+          </p>
+        </>
+      )
+    }
+    if (recipesLength === 250) {
+      return (
+        <>
+          <p>
+            {text1} <span className="text-red-500 font-bold">250</span> {text2}
+          </p>
+        </>
+      )
+    }
+  }
+
+  return <></>
 }
 
 export default AmountOfRecipes

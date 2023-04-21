@@ -96,6 +96,7 @@
     "amountofrecipes1": "Olet lisännyt",
     "amountofrecipes2": "reseptiä maksimimäärästä 250.",
     "amounterror": "Virhe ladatessa reseptien määrää tietokannasta.",
+    "amountloading": "Lataa reseptien määrää..",
     "recipesaved": "Resepti tallennettu!",
     "checktheform": "Tarkistathan lomakkeen",
     "errormsg": "Tapahtui virhe",

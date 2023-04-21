@@ -348,6 +348,7 @@ export const AddRecipe = ({ translations }: { translations: Translations }) => {
           text1={translations.amountofrecipes1}
           text2={translations.amountofrecipes2}
           amounterror={translations.amounterror}
+          amountloading={translations.amountloading}
         />
       </div>
       <hr></hr>
