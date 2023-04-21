@@ -50,10 +50,10 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/node_modules ./node_modules
 
-COPY --from=builder /app/init.sh ./usr/local/bin/
+COPY --from=builder /app/init.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/init.sh
 
-USER nextjs
+# USER nextjs
 
 EXPOSE 3000
 
