@@ -1,9 +1,0 @@
-version: '3'
-
-services:
-  frontend:
-    image: jamilla.azurecr.io/jamilla-fe
-    environment:
-      APP_URL: "https://jamilla.azurewebsites.net"
-      API_URL: "https://app-jamilla-be.azurewebsites.net/api"
-      USER_ID: "4f959a9c-b9d1-406b-b1ad-886c550066bf"

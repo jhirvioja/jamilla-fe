@@ -47,7 +47,7 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 const SearchFeed = ({ translations }: { translations: Translations }) => {
   const [recipes, setRecipes] = useState<JSX.Element[]>()
-  const [keyword, setKeyword] = useState<string>('')
+  const [keyword, setKeyword] = useState<string>('Init')
   const [isLoading, setLoading] = useState<boolean>(false)
   const [searchIsDone, setSearchIsDone] = useState<boolean>(false)
 
@@ -61,8 +61,6 @@ const SearchFeed = ({ translations }: { translations: Translations }) => {
       setLoading(false)
       return
     }
-
-    console.log(searchResultsData)
 
     const recipeIdsSet = new Set<string>()
 
