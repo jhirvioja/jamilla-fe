@@ -5,6 +5,15 @@ import Select from '../Select'
 import { Translations } from '../../types/recipes'
 import { deleteCookie } from '../../utils/cookieUtils'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
+import Spinner from '../Spinner'
+
+type Settings = {
+	theme: string | number
+	fontweight: string | number
+	lineheight: string | number
+	letterspacing: string | number
+	lang: string | number
+}
 
 const EditSettings = ({ translations }: { translations: Translations }) => {
   const router = useRouter()
@@ -97,7 +106,7 @@ const EditSettings = ({ translations }: { translations: Translations }) => {
     return 0
   }
 
-  const [settings, setSettings] = useLocalStorage('settings', {
+  const [settings, setSettings] = useLocalStorage<Settings>('settings', {
     theme: 'init',
     fontweight: 'init',
     lineheight: 'init',
@@ -160,6 +169,21 @@ const EditSettings = ({ translations }: { translations: Translations }) => {
     setSettings({ ...settings, [name]: figureOutLang(value) })
   }
 
+	useEffect(() => {
+		if (settings.theme === 'init') {
+			setSettings(
+				{
+					theme: 0,
+					fontweight: 0,
+					lineheight: 0,
+					letterspacing: 0,
+					lang: 0,
+				}
+			)
+		}
+
+  }, [])
+	
   useEffect(() => {
     if (
       settings.theme !== 'init' &&
@@ -176,7 +200,9 @@ const EditSettings = ({ translations }: { translations: Translations }) => {
       <div className="m-4 dark:text-white">{translations.disclaimer}</div>
       <hr></hr>
       {loading ? (
-        <></>
+        <div className="flex justify-center">
+					<div className="mt-8"><Spinner></Spinner></div>
+				</div>
       ) : (
         <form action="/browse">
           <div className="m-4">

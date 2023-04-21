@@ -5,9 +5,7 @@ import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 
 import dynamic from 'next/dynamic'
-const EditSettings = dynamic(() => import('../components/Settings/EditSettings'), {
-  loading: () => <p>Loading...</p>,
-})
+const EditSettings = dynamic(() => import('../components/Settings/EditSettings'))
 
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
