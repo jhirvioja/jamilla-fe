@@ -55,12 +55,12 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/node_modules ./node_modules
 
-COPY --from=builder /app/init.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/init.sh
+# COPY --from=builder /app/init.sh /usr/local/bin/
+# RUN chmod +x /usr/local/bin/init.sh
 
 USER nextjs
 
 EXPOSE 3000
 
-# CMD ["node_modules/.bin/next", "start", "-p", "3000"]
-ENTRYPOINT ["init.sh"]
+CMD ["node_modules/.bin/next", "start", "-p", "3000"]
+# ENTRYPOINT ["init.sh"]
