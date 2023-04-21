@@ -27,6 +27,8 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
+COPY 
+
 # If using npm comment out above and use below instead
 RUN npm run build
 
@@ -52,6 +54,10 @@ COPY --from=builder /app/node_modules ./node_modules
 
 USER nextjs
 
+COPY init.sh /usr/local/bin/
+RUN chmod u+x /usr/local/bin/init.sh
+
 EXPOSE 3000
 
-CMD ["node_modules/.bin/next", "start", "-p", "3000"]
+# CMD ["node_modules/.bin/next", "start", "-p", "3000"]
+ENTRYPOINT ["init.sh"]
