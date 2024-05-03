@@ -20,6 +20,14 @@ An a11y friendly React/Next.js + Tailwind CSS Recipe Book App!
 - Accessibility - not exhaustive but developed with that mindset
 - "About"-page which features further information about this project: motivations, reasonings, possible things that were planned but not done / could be implemented in the future
 
+## Pictures
+
+![Landing Page](jamilla-landing.jpg)
+![Feed](jamilla-feed.jpg)
+![Add recipe](jamilla-add.png)
+![Mobile 1](jamilla-mobile.jpg)![Mobile 2](jamilla-mobile2.jpg)
+![Mobile 3](jamilla-mobile3.jpg)![Mobile 4](jamilla-mobile4.jpg)
+
 ## Local Deployment
 
 Backend can be found at a [different repo](https://github.com/jhirvioja/jamilla-be) and is advised to deploy first. Take the backend address and add it to `next.config.js` env-settings as `API_URL`.
