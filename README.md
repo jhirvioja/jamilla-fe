@@ -25,8 +25,8 @@ An a11y friendly React/Next.js + Tailwind CSS Recipe Book App!
 ![Landing Page](jamilla-landing.jpg)
 ![Feed](jamilla-feed.jpg)
 ![Add recipe](jamilla-add.png)
-![Mobile 1](jamilla-mobile.jpg)![Mobile 2](jamilla-mobile2.jpg)
-![Mobile 3](jamilla-mobile3.jpg)![Mobile 4](jamilla-mobile4.jpg)
+![Mobile 1](jamilla-mobile.jpg) ![Mobile 2](jamilla-mobile2.jpg)
+![Mobile 3](jamilla-mobile3.png) ![Mobile 4](jamilla-mobile4.png)
 
 ## Local Deployment
 
